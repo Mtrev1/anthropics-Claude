@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#f3f0e7" />
+  <title>IronClad Peptides — Documented to the Residue</title>
+  <meta name="description" content="IronClad Peptides publishes the full primary structure, molecular weight, and third-party assay for every vial. Research-grade peptides, documented to the last amino acid. For laboratory research use only." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/styles.css" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23141310'/%3E%3Ctext x='16' y='23' font-size='20' text-anchor='middle' fill='%23f3f0e7' font-family='monospace' font-weight='bold'%3EIC%3C/text%3E%3C/svg%3E" />
+</head>
+<body>
+  <a class="skip-link" href="#index">Skip to catalog</a>
+
+  <!-- running compliance strip -->
+  <div class="runstrip" aria-hidden="true">
+    <div class="runstrip__track">
+      <span>RESEARCH USE ONLY</span><b>·</b><span>NOT FOR HUMAN CONSUMPTION</span><b>·</b>
+      <span>HPLC ≥ 99%</span><b>·</b><span>MASS-SPEC VERIFIED</span><b>·</b><span>COA PER LOT</span><b>·</b>
+      <span>RESEARCH USE ONLY</span><b>·</b><span>NOT FOR HUMAN CONSUMPTION</span><b>·</b>
+      <span>HPLC ≥ 99%</span><b>·</b><span>MASS-SPEC VERIFIED</span><b>·</b><span>COA PER LOT</span><b>·</b>
+    </div>
+  </div>
+
+  <!-- header -->
+  <header class="head" id="head">
+    <div class="wrap head__inner">
+      <a href="#top" class="brand" aria-label="IronClad Peptides home">
+        <span class="brand__mark" aria-hidden="true">IC</span>
+        <span class="brand__word">IRONCLAD<span class="brand__tag">Peptides · Primary Structure</span></span>
+      </a>
+      <nav class="head__nav" aria-label="Primary">
+        <a href="#index"><i>01</i> Index</a>
+        <a href="#residues"><i>02</i> Residues</a>
+        <a href="#method"><i>03</i> Method</a>
+        <a href="#notes"><i>04</i> Notes</a>
+      </nav>
+      <button class="head__sel" id="selOpen" aria-haspopup="dialog">
+        Selection <span class="head__count" id="selCount">0</span>
+      </button>
+    </div>
+  </header>
+
+  <main id="top">
+    <!-- HERO -->
+    <section class="hero wrap">
+      <div class="hero__grid">
+        <div class="hero__copy">
+          <p class="eyebrow">§00 — Primary-structure peptides</p>
+          <h1 class="hero__title">
+            Know your peptide,<br /><span class="u">residue by residue.</span>
+          </h1>
+          <p class="hero__lede">
+            We publish the full primary structure, molecular weight and independent
+            assay for every vial. Ironclad verification — documented to the last
+            amino acid, so a result can always be traced back to a certificate.
+          </p>
+          <div class="hero__cta">
+            <a href="#index" class="btn btn--solid">Open the index</a>
+            <a href="#method" class="btn btn--line">How we verify →</a>
+          </div>
+          <dl class="hero__facts">
+            <div><dt data-count-to="99.4" data-suffix="%">0</dt><dd>median HPLC purity</dd></div>
+            <div><dt data-count-to="20">0</dt><dd>amino-acid residues, keyed</dd></div>
+            <div><dt data-count-to="100" data-suffix="%">0</dt><dd>lots with a COA</dd></div>
+          </dl>
+        </div>
+
+        <figure class="chain" aria-label="Animated peptide backbone">
+          <div class="chain__labels"><span>N-terminus</span><span>C-terminus</span></div>
+          <canvas id="chainCanvas" class="chain__canvas"></canvas>
+          <figcaption class="chain__cap">Fig.&nbsp;1 — a peptide is a chain of amino-acid residues linked N→C.</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- SEQUENCE TICKER -->
+    <section class="seqticker" aria-hidden="true">
+      <div class="seqticker__track" id="seqTrack"></div>
+    </section>
+
+    <!-- INDEX / CATALOG -->
+    <section class="section wrap" id="index">
+      <div class="section__head">
+        <div>
+          <p class="eyebrow">§01 — The index</p>
+          <h2 class="section__title">Every listing, as a specification.</h2>
+        </div>
+        <p class="section__note">
+          Prices are per vial. Each row expands to its sequence, class breakdown and
+          certificate of analysis. Filter by functional class.<sup>1</sup>
+        </p>
+      </div>
+
+      <div class="filters" id="filters" role="tablist" aria-label="Filter index">
+        <button class="tab is-active" data-filter="all" role="tab" aria-selected="true">All</button>
+        <button class="tab" data-filter="repair" role="tab" aria-selected="false">Repair</button>
+        <button class="tab" data-filter="cognitive" role="tab" aria-selected="false">Cognitive</button>
+        <button class="tab" data-filter="longevity" role="tab" aria-selected="false">Longevity</button>
+        <button class="tab" data-filter="cosmetic" role="tab" aria-selected="false">Cosmetic</button>
+      </div>
+
+      <!-- column header -->
+      <div class="idx-head" aria-hidden="true">
+        <span>№</span><span>Peptide</span><span>Sequence</span><span>MW</span><span>Purity</span><span>Price</span><span></span>
+      </div>
+      <ol class="idx" id="idx"><!-- rows injected --></ol>
+    </section>
+
+    <!-- RESIDUE KEY -->
+    <section class="section wrap" id="residues">
+      <div class="section__head">
+        <div>
+          <p class="eyebrow">§02 — The residue key</p>
+          <h2 class="section__title">Twenty letters. Every peptide we ship.</h2>
+        </div>
+        <p class="section__note">
+          The one-letter codes below are the alphabet of primary structure. We colour
+          each residue by its functional class so a sequence reads at a glance.
+        </p>
+      </div>
+      <div class="legend" id="legend"><!-- injected --></div>
+      <div class="keygrid" id="keygrid"><!-- injected --></div>
+    </section>
+
+    <!-- METHOD -->
+    <section class="section wrap" id="method">
+      <div class="section__head">
+        <div>
+          <p class="eyebrow">§03 — Method</p>
+          <h2 class="section__title">Ironclad means it's on the certificate.</h2>
+        </div>
+      </div>
+      <ol class="method">
+        <li class="method__step">
+          <span class="method__n">01</span>
+          <h3>Identity</h3>
+          <p>Mass spectrometry confirms the observed molecular weight against the theoretical mass of the sequence.</p>
+        </li>
+        <li class="method__step">
+          <span class="method__n">02</span>
+          <h3>Purity</h3>
+          <p>Reversed-phase HPLC quantifies purity by area-under-curve. Target ≥ 99%, with the trace printed on the COA.</p>
+        </li>
+        <li class="method__step">
+          <span class="method__n">03</span>
+          <h3>Safety screen</h3>
+          <p>An LAL endotoxin screen runs on every lot, and results travel with the certificate.</p>
+        </li>
+        <li class="method__step">
+          <span class="method__n">04</span>
+          <h3>Traceability</h3>
+          <p>Every vial carries a lot number that resolves to its full analytical report for the life of the batch.</p>
+        </li>
+      </ol>
+    </section>
+
+    <!-- NOTES / FAQ -->
+    <section class="section wrap" id="notes">
+      <div class="section__head">
+        <div>
+          <p class="eyebrow">§04 — Notes</p>
+          <h2 class="section__title">Footnotes &amp; frequently asked.</h2>
+        </div>
+      </div>
+      <div class="notes">
+        <details class="note" open>
+          <summary><sup>1</sup> Are these for human use?</summary>
+          <p>No. All products are supplied strictly for <em>in-vitro</em> laboratory and research use. They are not drugs, supplements or cosmetics, and are not for human or veterinary consumption.</p>
+        </details>
+        <details class="note">
+          <summary><sup>2</sup> Are the displayed sequences real?</summary>
+          <p>The one-letter primary structures shown are the published sequences for each peptide, presented for identification. Certain research peptides also contain modified or non-standard residues that a single-letter code cannot fully represent.</p>
+        </details>
+        <details class="note">
+          <summary><sup>3</sup> What is on the certificate of analysis?</summary>
+          <p>Each lot COA includes the HPLC purity trace, mass-spectrometry identity confirmation, an LAL endotoxin result, the lot number and the analysis date.</p>
+        </details>
+        <details class="note">
+          <summary><sup>4</sup> How are peptides shipped and stored?</summary>
+          <p>Lyophilized, sealed under inert gas, and shipped with insulated, temperature-monitored packaging. Store lyophilized vials frozen and protected from light.</p>
+        </details>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="foot">
+    <div class="wrap foot__inner">
+      <div class="foot__brand">
+        <span class="brand__word brand__word--foot">IRONCLAD<span class="brand__tag">Peptides · Primary Structure</span></span>
+        <p>Research-grade peptides, documented to the residue and traceable to a report.</p>
+      </div>
+      <nav class="foot__col"><h4>Index</h4><a href="#index">Catalog</a><a href="#residues">Residue key</a><a href="#method">Method</a></nav>
+      <nav class="foot__col"><h4>Company</h4><a href="#notes">Notes</a><a href="#method">Verification</a><a href="#notes">Shipping</a></nav>
+      <nav class="foot__col"><h4>Legal</h4><a href="#notes">Terms of use</a><a href="#notes">Research policy</a></nav>
+    </div>
+    <p class="foot__ruo wrap">
+      <strong>For laboratory and research use only.</strong> The products offered here are intended
+      solely for <em>in-vitro</em> research by qualified professionals. They are not drugs, foods,
+      cosmetics or medical devices, and no therapeutic claim is made. Purchasers are responsible for
+      compliance with all applicable laws. This is a fictional demonstration store.
+    </p>
+    <p class="foot__bottom wrap"><span>© <span id="year"></span> IronClad Peptides.</span><span>Demo build · placeholder content</span></p>
+  </footer>
+
+  <!-- SELECTION DOCK -->
+  <div class="dock" id="dock" hidden>
+    <div class="wrap dock__inner">
+      <span class="dock__label"><b id="dockCount">0</b> in selection</span>
+      <span class="dock__total" id="dockTotal">$0.00</span>
+      <button class="btn btn--solid dock__btn" id="dockReview">Review selection →</button>
+    </div>
+  </div>
+
+  <!-- SELECTION PANEL -->
+  <div class="panel-overlay" id="panelOverlay" hidden></div>
+  <aside class="panel" id="panel" role="dialog" aria-modal="true" aria-label="Your selection" aria-hidden="true">
+    <header class="panel__head">
+      <h2>Selection</h2>
+      <button class="panel__close" id="panelClose" aria-label="Close">×</button>
+    </header>
+    <div class="panel__items" id="panelItems"></div>
+    <div class="panel__empty" id="panelEmpty">
+      <p>Nothing selected yet.</p>
+      <button class="btn btn--line" id="panelBrowse">Open the index</button>
+    </div>
+    <footer class="panel__foot" id="panelFoot" hidden>
+      <div class="panel__row"><span>Subtotal</span><span id="panelSubtotal">$0.00</span></div>
+      <p class="panel__ruo">Research use only. Checkout is a demo — no payment is taken.</p>
+      <button class="btn btn--solid btn--block" id="panelCheckout">Request &amp; checkout</button>
+    </footer>
+  </aside>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script src="assets/js/main.js" defer></script>
+</body>
+</html>
