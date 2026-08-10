@@ -384,9 +384,60 @@
   }
 
   /* ---------------------------------------------------------------
+     Age verification gate (must be 21+)
+  --------------------------------------------------------------- */
+  const AGE_KEY = "axiom_age_ok_v1";
+  function initAgeGate() {
+    const gate = $("#ageGate");
+    if (!gate) return;
+
+    let verified = false;
+    try { verified = localStorage.getItem(AGE_KEY) === "yes"; } catch {}
+
+    if (verified) { gate.hidden = true; return; }
+
+    // lock scroll while the gate is up
+    document.body.classList.add("gate-locked");
+    const ask = $("#ageGateAsk");
+    const deny = $("#ageGateDeny");
+    $("#ageYes").focus();
+
+    // keep focus inside the gate
+    gate.addEventListener("keydown", (e) => {
+      if (e.key !== "Tab") return;
+      const focusable = $$("button", gate).filter((b) => b.offsetParent !== null);
+      if (!focusable.length) return;
+      const first = focusable[0], last = focusable[focusable.length - 1];
+      if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+      else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+    });
+
+    $("#ageYes").addEventListener("click", () => {
+      try { localStorage.setItem(AGE_KEY, "yes"); } catch {}
+      gate.style.transition = "opacity .4s var(--ease)";
+      gate.style.opacity = "0";
+      document.body.classList.remove("gate-locked");
+      setTimeout(() => { gate.hidden = true; }, 400);
+    });
+
+    $("#ageNo").addEventListener("click", () => {
+      ask.hidden = true;
+      deny.hidden = false;
+      $("#ageBack").focus();
+    });
+
+    $("#ageBack").addEventListener("click", () => {
+      deny.hidden = true;
+      ask.hidden = false;
+      $("#ageYes").focus();
+    });
+  }
+
+  /* ---------------------------------------------------------------
      Init
   --------------------------------------------------------------- */
   document.addEventListener("DOMContentLoaded", () => {
+    initAgeGate();
     $("#year").textContent = new Date().getFullYear();
     renderProducts();
     initFilters();

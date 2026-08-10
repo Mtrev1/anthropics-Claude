@@ -13,6 +13,46 @@
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ctext y='26' font-size='26'%3E%F0%9F%A7%AC%3C/text%3E%3C/svg%3E" />
 </head>
 <body>
+  <!-- Age verification gate -->
+  <div class="agegate" id="ageGate" role="dialog" aria-modal="true" aria-labelledby="ageGateTitle" aria-describedby="ageGateDesc">
+    <div class="agegate__backdrop" aria-hidden="true"></div>
+    <div class="agegate__card" id="ageGateAsk">
+      <svg class="agegate__mark" viewBox="0 0 40 40" width="46" height="46" aria-hidden="true">
+        <defs>
+          <linearGradient id="ageGrad" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="#4ee6c4" /><stop offset="1" stop-color="#6a8bff" />
+          </linearGradient>
+        </defs>
+        <g stroke="url(#ageGrad)" stroke-width="2.4" fill="none" stroke-linecap="round">
+          <path d="M12 4 C28 12, 12 20, 28 28 C12 32, 28 36, 12 36" opacity="0.95"/>
+          <path d="M28 4 C12 12, 28 20, 12 28 C28 32, 12 36, 28 36" opacity="0.6"/>
+          <line x1="14.5" y1="9" x2="25.5" y2="9"/><line x1="14.5" y1="20" x2="25.5" y2="20"/><line x1="14.5" y1="31" x2="25.5" y2="31"/>
+        </g>
+      </svg>
+      <span class="agegate__pill">Age verification</span>
+      <h1 class="agegate__title" id="ageGateTitle">Are you 21 or older?</h1>
+      <p class="agegate__desc" id="ageGateDesc">
+        You must be at least <strong>21 years of age</strong> to enter this site. All products
+        are supplied strictly for laboratory and research use only. By entering, you confirm you
+        meet the minimum age requirement and agree to the terms of use.
+      </p>
+      <div class="agegate__actions">
+        <button class="btn btn--primary agegate__btn" id="ageYes">Yes, I am 21 or older</button>
+        <button class="btn btn--ghost agegate__btn" id="ageNo">No</button>
+      </div>
+    </div>
+
+    <div class="agegate__card agegate__card--deny" id="ageGateDeny" hidden>
+      <div class="agegate__deny-mark" aria-hidden="true">⛔</div>
+      <h1 class="agegate__title">Access restricted</h1>
+      <p class="agegate__desc">
+        We're sorry, but you must be at least <strong>21 years of age</strong> to access this
+        website. Please come back when you meet the minimum age requirement.
+      </p>
+      <button class="btn btn--ghost agegate__btn" id="ageBack">Go back</button>
+    </div>
+  </div>
+
   <!-- Skip link for a11y -->
   <a class="skip-link" href="#catalog">Skip to catalog</a>
 

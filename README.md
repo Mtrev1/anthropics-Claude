@@ -6,6 +6,9 @@ build with placeholder content** — for laboratory and research use only.
 
 ## Highlights
 
+- **Age verification gate** — a "must be 21 or older" screen on first visit with
+  Yes / No options. "Yes" enters and is remembered via `localStorage`; "No"
+  shows an access-restricted screen. Locks scroll and traps focus while open.
 - **Animated molecular hero** — a live particle-network canvas that scales its
   node count to viewport size, caps DPR, and pauses when off-screen.
 - **Working cart** — add/remove, quantity steppers, live subtotal, slide-in
