@@ -54,68 +54,74 @@
     seq.split("").forEach((L) => { c[classOf(L)]++; });
     return c;
   }
+  const CLASS_HEX = { nonpolar: "#9a7b3f", polar: "#227e70", acidic: "#c2432c", basic: "#2f52c8" };
+  function dominantClass(seq) {
+    const c = classCounts(seq);
+    return Object.keys(c).reduce((a, b) => (c[b] > c[a] ? b : a), "nonpolar");
+  }
+  /* ---------- line-art peptide vial, powder tinted by dominant residue class ---------- */
+  function vial(seq, big) {
+    const col = CLASS_HEX[dominantClass(seq)];
+    const w = big ? 70 : 34;
+    return `<svg class="vial${big ? " vial--big" : ""}" viewBox="0 0 40 62" width="${w}" fill="none" aria-hidden="true" style="--vg:${col}">
+      <rect x="13" y="2" width="14" height="6" rx="1.4" fill="currentColor"/>
+      <rect x="14.5" y="8" width="11" height="3.5" fill="currentColor" opacity=".55"/>
+      <rect x="10" y="11.5" width="20" height="47" rx="5" fill="var(--paper)" stroke="currentColor" stroke-width="1.5"/>
+      <path class="vpowder" style="color:${col}" d="M11.5 44 h17 v9 a3.5 3.5 0 0 1 -3.5 3.5 h-10 a3.5 3.5 0 0 1 -3.5 -3.5 z" fill="${col}"/>
+      <line x1="11.5" y1="44" x2="28.5" y2="44" stroke="${col}" stroke-width="1.2"/>
+      <rect x="10" y="26" width="20" height="11" fill="var(--paper)"/>
+      <line x1="10" y1="26" x2="30" y2="26" stroke="currentColor" stroke-width="1"/>
+      <line x1="10" y1="37" x2="30" y2="37" stroke="currentColor" stroke-width="1"/>
+      <line x1="13" y1="29.5" x2="27" y2="29.5" stroke="currentColor" stroke-width="1" opacity=".4"/>
+      <line x1="13" y1="32.5" x2="24" y2="32.5" stroke="currentColor" stroke-width="1" opacity=".4"/>
+      <ellipse class="vshine" cx="15" cy="20" rx="2" ry="7" fill="var(--paper)" opacity=".5"/>
+    </svg>`;
+  }
 
-  /* ---------- render the index ---------- */
+  /* ---------- render the catalog (card grid, one animated vial per peptide) ---------- */
   const idx = $("#idx");
   function renderIndex() {
     idx.innerHTML = PRODUCTS.map((p, i) => {
       const c = classCounts(p.seq);
       const total = p.seq.length;
       const pct = (n) => (n / total) * 100;
+      const col = CLASS_HEX[dominantClass(p.seq)];
       return `
-      <li class="idx__item reveal" data-cat="${p.cat}" data-id="${p.id}">
-        <button class="idx__row-top" data-toggle="${p.id}" aria-expanded="false">
-          <span class="idx__num">${String(i).padStart(2, "0")}</span>
-          <span class="idx__name">${p.name}<small>${CAT[p.cat]} · ${p.size}</small></span>
-          <span class="idx__seq">${chips(p.seq)}</span>
-          <span class="idx__mw">${p.mw}</span>
-          <span class="idx__purity">${p.purity}</span>
-          <span class="idx__price">${money(p.price)}</span>
-          <span class="idx__actions"><span class="idx__toggle" aria-hidden="true">+</span></span>
-        </button>
-        <div class="idx__detail">
-          <div class="idx__detail-inner">
-            <div class="idx__detail-pad">
-              <div>
-                <p class="idx__desc">${p.desc}</p>
-                <div class="idx__seqbig">${chips(p.seq, true)}</div>
-                <div class="classbar" aria-hidden="true">
-                  <span class="c-nonpolar" style="width:${pct(c.nonpolar)}%"></span>
-                  <span class="c-polar" style="width:${pct(c.polar)}%"></span>
-                  <span class="c-acidic" style="width:${pct(c.acidic)}%"></span>
-                  <span class="c-basic" style="width:${pct(c.basic)}%"></span>
-                </div>
-                <p class="classbar-key">${total} residues — ${c.nonpolar} nonpolar · ${c.polar} polar · ${c.acidic} acidic · ${c.basic} basic</p>
-              </div>
-              <div class="idx__spec">
-                <dl>
-                  <dt>Sequence</dt><dd>${p.seq}</dd>
-                  <dt>Length</dt><dd>${total} aa</dd>
-                  <dt>Mol. weight</dt><dd>${p.mw} g/mol</dd>
-                  <dt>Purity</dt><dd>${p.purity}</dd>
-                  <dt>Format</dt><dd>${p.size} · lyophilized</dd>
-                </dl>
-                <span class="idx__coa">📄 COA · lot #IC-${1000 + Math.floor(Math.random() * 8999)} <a href="#method">view report</a></span>
-                <button class="btn btn--solid idx__add" data-add="${p.id}">Add to selection</button>
-              </div>
-            </div>
+      <li class="pcard reveal" data-cat="${p.cat}" data-id="${p.id}">
+        <div class="pcard__stage" style="--vg:${col}">
+          <span class="pcard__num">${String(i).padStart(2, "0")}</span>
+          <span class="pcard__purity">${p.purity}</span>
+          <span class="pcard__cat">${CAT[p.cat]}</span>
+          ${vial(p.seq, true)}
+        </div>
+        <div class="pcard__body">
+          <h3 class="pcard__name">${p.name}</h3>
+          <p class="pcard__desc">${p.desc}</p>
+          <div class="pcard__seq" title="Primary structure: ${p.seq}">${chips(p.seq)}</div>
+          <div class="classbar" aria-hidden="true">
+            <span class="c-nonpolar" style="width:${pct(c.nonpolar)}%"></span>
+            <span class="c-polar" style="width:${pct(c.polar)}%"></span>
+            <span class="c-acidic" style="width:${pct(c.acidic)}%"></span>
+            <span class="c-basic" style="width:${pct(c.basic)}%"></span>
           </div>
+          <div class="pcard__meta">
+            <span>${p.size}</span><span>${total} aa</span><span>MW&nbsp;${p.mw}</span>
+          </div>
+          <div class="pcard__foot">
+            <span class="pcard__price">${money(p.price)}<small>per vial</small></span>
+            <button class="btn btn--solid pcard__add" data-add="${p.id}">Add</button>
+          </div>
+          <span class="idx__coa">📄 COA · lot #IC-${1000 + Math.floor(Math.random() * 8999)} <a href="#method">view report</a></span>
         </div>
       </li>`;
     }).join("");
-    observe($$(".idx__item"));
+    observe($$(".pcard"));
   }
 
-  /* ---------- expand / collapse rows ---------- */
+  /* ---------- add-to-selection (delegated) ---------- */
   idx.addEventListener("click", (e) => {
-    const t = e.target.closest("[data-toggle]");
     const add = e.target.closest("[data-add]");
-    if (add) { e.stopPropagation(); addItem(add.dataset.add, add); return; }
-    if (!t) return;
-    const item = t.closest(".idx__item");
-    const open = item.classList.toggle("is-open");
-    t.setAttribute("aria-expanded", String(open));
-    t.querySelector(".idx__toggle").textContent = open ? "−" : "+";
+    if (add) { e.stopPropagation(); addItem(add.dataset.add, add); }
   });
 
   /* ---------- filters ---------- */
@@ -123,7 +129,7 @@
     $$(".tab").forEach((x) => { x.classList.remove("is-active"); x.setAttribute("aria-selected", "false"); });
     tab.classList.add("is-active"); tab.setAttribute("aria-selected", "true");
     const f = tab.dataset.filter;
-    $$(".idx__item").forEach((it) => it.classList.toggle("is-hidden", !(f === "all" || it.dataset.cat === f)));
+    $$(".pcard").forEach((it) => it.classList.toggle("is-hidden", !(f === "all" || it.dataset.cat === f)));
   }));
 
   /* ---------- residue key + legend ---------- */
@@ -164,7 +170,7 @@
     sel[id] = (sel[id] || 0) + 1; save(); syncUI();
     const p = PRODUCTS.find((x) => x.id === id);
     toast(`${p.name} added to selection`);
-    if (btn) { btn.classList.add("is-added"); btn.textContent = "Added ✓"; setTimeout(() => { btn.classList.remove("is-added"); btn.textContent = "Add to selection"; }, 1200); }
+    if (btn) { btn.classList.add("is-added"); btn.textContent = "Added ✓"; setTimeout(() => { btn.classList.remove("is-added"); btn.textContent = "Add"; }, 1200); }
   }
   function setQty(id, q) { if (q <= 0) delete sel[id]; else sel[id] = q; save(); syncUI(); }
 
@@ -329,8 +335,39 @@
     on(); window.addEventListener("scroll", on, { passive: true });
   }
 
+  /* ---------- age verification gate (must be 21+) ---------- */
+  const AGE_KEY = "ironclad_age_ok_v1";
+  function initAgeGate() {
+    const gate = $("#ageGate"); if (!gate) return;
+    let ok = false; try { ok = localStorage.getItem(AGE_KEY) === "yes"; } catch {}
+    if (ok) { gate.hidden = true; return; }
+
+    document.body.classList.add("gate-locked");
+    const ask = $("#ageAsk"), deny = $("#ageDeny");
+    $("#ageYes").focus();
+
+    gate.addEventListener("keydown", (e) => {
+      if (e.key !== "Tab") return;
+      const f = $$("button", gate).filter((b) => b.offsetParent !== null);
+      if (!f.length) return;
+      const first = f[0], last = f[f.length - 1];
+      if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+      else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+    });
+
+    $("#ageYes").addEventListener("click", () => {
+      try { localStorage.setItem(AGE_KEY, "yes"); } catch {}
+      gate.style.transition = "opacity .4s var(--ease)"; gate.style.opacity = "0";
+      document.body.classList.remove("gate-locked");
+      setTimeout(() => { gate.hidden = true; }, 400);
+    });
+    $("#ageNo").addEventListener("click", () => { ask.hidden = true; deny.hidden = false; $("#ageBack").focus(); });
+    $("#ageBack").addEventListener("click", () => { deny.hidden = true; ask.hidden = false; $("#ageYes").focus(); });
+  }
+
   /* ---------- init ---------- */
   document.addEventListener("DOMContentLoaded", () => {
+    initAgeGate();
     $("#year").textContent = new Date().getFullYear();
     renderIndex();
     renderKey();

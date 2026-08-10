@@ -13,6 +13,26 @@
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23141310'/%3E%3Ctext x='16' y='23' font-size='20' text-anchor='middle' fill='%23f3f0e7' font-family='monospace' font-weight='bold'%3EIC%3C/text%3E%3C/svg%3E" />
 </head>
 <body>
+  <!-- Age verification gate (21+) -->
+  <div class="agegate" id="ageGate" role="dialog" aria-modal="true" aria-labelledby="ageTitle" aria-describedby="ageDesc">
+    <div class="agegate__card" id="ageAsk">
+      <span class="agegate__mark" aria-hidden="true">IC</span>
+      <span class="agegate__pill">Age verification</span>
+      <h1 class="agegate__title" id="ageTitle">Are you 21 or older?</h1>
+      <p class="agegate__desc" id="ageDesc">You must be at least <strong>21 years of age</strong> to enter. All products are supplied strictly for laboratory and research use only. By entering, you confirm you meet the minimum age requirement and agree to the terms of use.</p>
+      <div class="agegate__actions">
+        <button class="btn btn--solid" id="ageYes">Yes, I am 21 or older</button>
+        <button class="btn btn--line" id="ageNo">No</button>
+      </div>
+    </div>
+    <div class="agegate__card agegate__card--deny" id="ageDeny" hidden>
+      <span class="agegate__mark agegate__mark--deny" aria-hidden="true">✕</span>
+      <h1 class="agegate__title">Access restricted</h1>
+      <p class="agegate__desc">You must be at least <strong>21 years of age</strong> to access this site. Please come back when you meet the minimum age requirement.</p>
+      <button class="btn btn--line" id="ageBack">Go back</button>
+    </div>
+  </div>
+
   <a class="skip-link" href="#index">Skip to catalog</a>
 
   <!-- running compliance strip -->
@@ -90,8 +110,8 @@
           <h2 class="section__title">Every listing, as a specification.</h2>
         </div>
         <p class="section__note">
-          Prices are per vial. Each row expands to its sequence, class breakdown and
-          certificate of analysis. Filter by functional class.<sup>1</sup>
+          Prices are per vial. Every peptide lists its full sequence, class breakdown
+          and certificate of analysis. Filter by functional class.<sup>1</sup>
         </p>
       </div>
 
@@ -103,11 +123,7 @@
         <button class="tab" data-filter="cosmetic" role="tab" aria-selected="false">Cosmetic</button>
       </div>
 
-      <!-- column header -->
-      <div class="idx-head" aria-hidden="true">
-        <span>№</span><span>Peptide</span><span>Sequence</span><span>MW</span><span>Purity</span><span>Price</span><span></span>
-      </div>
-      <ol class="idx" id="idx"><!-- rows injected --></ol>
+      <ol class="pgrid" id="idx"><!-- cards injected --></ol>
     </section>
 
     <!-- RESIDUE KEY -->
