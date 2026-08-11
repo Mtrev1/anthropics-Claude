@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#0a0b0d" />
+  <title>IronClad Peptides — Research Peptides, Built Ironclad</title>
+  <meta name="description" content="IronClad Peptides forges research-grade peptides to a single standard: HPLC purity, mass-spec identity, endotoxin screening and lot-level traceability. For laboratory research use only." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Barlow:wght@400;500;600&family=Chakra+Petch:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/styles.css" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%230a0b0d'/%3E%3Ctext x='16' y='23' font-size='17' text-anchor='middle' fill='%23c2894b' font-family='Oswald,sans-serif' font-weight='700'%3EIC%3C/text%3E%3C/svg%3E" />
+</head>
+<body>
+  <!-- shared metal gradients referenced by emblems & vials -->
+  <svg class="defs" width="0" height="0" aria-hidden="true"><defs>
+    <linearGradient id="steelV" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#565c66"/><stop offset=".48" stop-color="#2b2f36"/>
+      <stop offset=".52" stop-color="#20242a"/><stop offset="1" stop-color="#4a505a"/>
+    </linearGradient>
+    <linearGradient id="steelCyl" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#20242a"/><stop offset=".28" stop-color="#6d727b"/>
+      <stop offset=".5" stop-color="#b9bec7"/><stop offset=".72" stop-color="#6d727b"/><stop offset="1" stop-color="#20242a"/>
+    </linearGradient>
+    <linearGradient id="chromeG" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#f4f6fa"/><stop offset=".45" stop-color="#c2c7d0"/>
+      <stop offset=".55" stop-color="#7c828c"/><stop offset="1" stop-color="#dfe3e9"/>
+    </linearGradient>
+    <linearGradient id="bronzeG" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#f0b972"/><stop offset=".45" stop-color="#c2894b"/>
+      <stop offset=".55" stop-color="#95632f"/><stop offset="1" stop-color="#c2894b"/>
+    </linearGradient>
+    <linearGradient id="bronzeCyl" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#7c4f26"/><stop offset=".3" stop-color="#c2894b"/>
+      <stop offset=".5" stop-color="#f0b972"/><stop offset=".72" stop-color="#c2894b"/><stop offset="1" stop-color="#7c4f26"/>
+    </linearGradient>
+  </defs></svg>
+
+  <a class="skip-link" href="#catalog">Skip to catalog</a>
+
+  <!-- Age verification gate (21+) -->
+  <div class="agegate" id="ageGate" role="dialog" aria-modal="true" aria-labelledby="ageTitle" aria-describedby="ageDesc">
+    <div class="agegate__card plate" id="ageAsk">
+      <div class="agegate__emblem" id="ageEmblem" aria-hidden="true"></div>
+      <span class="agegate__pill">Age verification</span>
+      <h1 class="agegate__title chrome" id="ageTitle">Are you 21 or older?</h1>
+      <p class="agegate__desc" id="ageDesc">You must be at least <strong>21 years of age</strong> to enter. All products are supplied strictly for laboratory and research use only. By entering, you confirm you meet the minimum age requirement and agree to the terms of use.</p>
+      <div class="agegate__actions">
+        <button class="btn btn--bronze" id="ageYes">Yes — I am 21 or older</button>
+        <button class="btn btn--steel" id="ageNo">No</button>
+      </div>
+    </div>
+    <div class="agegate__card plate agegate__card--deny" id="ageDeny" hidden>
+      <div class="agegate__deny" aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="40" height="40" fill="none" stroke="#c2894b" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </div>
+      <h1 class="agegate__title chrome">Access restricted</h1>
+      <p class="agegate__desc">You must be at least <strong>21 years of age</strong> to access this site. Please come back when you meet the minimum age requirement.</p>
+      <button class="btn btn--steel" id="ageBack">Go back</button>
+    </div>
+  </div>
+
+  <!-- compliance ticker -->
+  <div class="ticker" aria-hidden="true">
+    <div class="ticker__track" id="tickerTrack"></div>
+  </div>
+
+  <!-- header -->
+  <header class="nav" id="nav">
+    <div class="wrap nav__inner">
+      <a href="#top" class="brand" aria-label="IronClad Peptides home">
+        <span class="brand__emblem" id="navEmblem" aria-hidden="true"></span>
+        <span class="brand__word"><span class="chrome">IRONCLAD</span><small>Peptides</small></span>
+      </a>
+      <nav class="nav__links" aria-label="Primary">
+        <a href="#catalog">Catalog</a>
+        <a href="#standard">Standard</a>
+        <a href="#process">Process</a>
+        <a href="#faq">FAQ</a>
+      </nav>
+      <button class="nav__sel" id="selOpen" aria-haspopup="dialog">
+        <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="20" r="1.3"/><circle cx="18" cy="20" r="1.3"/><path d="M2.5 3h2.2l2.3 12.2a1.6 1.6 0 0 0 1.6 1.3h8.4a1.6 1.6 0 0 0 1.6-1.2L21.5 7H6"/></svg>
+        Selection<span class="nav__count" id="selCount">0</span>
+      </button>
+      <button class="nav__burger" id="burger" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>
+    </div>
+  </header>
+  <div class="mobilemenu" id="mobileMenu" aria-hidden="true">
+    <a href="#catalog">Catalog</a><a href="#standard">Standard</a><a href="#process">Process</a><a href="#faq">FAQ</a>
+  </div>
+
+  <main id="top">
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero__grain" aria-hidden="true"></div>
+      <div class="hero__gear" id="heroGear" aria-hidden="true"></div>
+      <div class="wrap hero__inner">
+        <div class="hero__copy">
+          <p class="eyebrow"><span class="eyebrow__tick"></span>Research-grade peptides</p>
+          <h1 class="hero__title">
+            <span class="chrome">Peptides,</span><br /><span class="chrome">built</span> <span class="bronze-text">ironclad.</span>
+          </h1>
+          <p class="hero__lede">
+            One standard, no exceptions. Every lot is assayed for purity and identity,
+            endotoxin-screened, sealed under argon and traceable to its certificate.
+            Reagents engineered to hold under scrutiny.
+          </p>
+          <div class="hero__cta">
+            <a href="#catalog" class="btn btn--bronze">Browse the catalog</a>
+            <a href="#standard" class="btn btn--steel">The IronClad standard →</a>
+          </div>
+          <dl class="hero__stats">
+            <div class="plate hero__stat"><dt data-count-to="99.4" data-suffix="%">0</dt><dd>Median HPLC purity</dd></div>
+            <div class="plate hero__stat"><dt data-count-to="100" data-suffix="%">0</dt><dd>Lots with a COA</dd></div>
+            <div class="plate hero__stat"><dt data-count-to="42" data-suffix="h">0</dt><dd>Avg. dispatch</dd></div>
+          </dl>
+        </div>
+        <div class="hero__crest" id="heroCrest" aria-hidden="true"></div>
+      </div>
+    </section>
+
+    <!-- CREDENTIALS -->
+    <section class="creds" aria-label="Standards">
+      <div class="creds__marquee"><div class="creds__track" id="credTrack"></div></div>
+    </section>
+
+    <!-- PILLARS -->
+    <section class="section wrap" id="standard">
+      <div class="section__head">
+        <p class="eyebrow"><span class="eyebrow__tick"></span>The IronClad standard</p>
+        <h2 class="section__title chrome">No weak links.</h2>
+        <p class="section__sub">Four checks stand between the melt and your bench. Every lot clears all four, and the evidence ships with it.</p>
+      </div>
+      <div class="pillars" id="pillars"></div>
+    </section>
+
+    <!-- CATALOG -->
+    <section class="section wrap" id="catalog">
+      <div class="section__head">
+        <p class="eyebrow"><span class="eyebrow__tick"></span>The catalog</p>
+        <h2 class="section__title chrome">The arsenal.</h2>
+        <p class="section__sub">Prices per vial. Every listing carries its sequence, molecular weight, assayed purity and a lot-level certificate. Research use only.</p>
+      </div>
+      <div class="filters" id="filters" role="tablist" aria-label="Filter catalog">
+        <button class="chip is-active" data-filter="all" role="tab" aria-selected="true">All</button>
+        <button class="chip" data-filter="repair" role="tab" aria-selected="false">Repair</button>
+        <button class="chip" data-filter="cognitive" role="tab" aria-selected="false">Cognitive</button>
+        <button class="chip" data-filter="longevity" role="tab" aria-selected="false">Longevity</button>
+        <button class="chip" data-filter="cosmetic" role="tab" aria-selected="false">Cosmetic</button>
+      </div>
+      <div class="grid" id="grid" aria-live="polite"></div>
+    </section>
+
+    <!-- PROCESS -->
+    <section class="section wrap" id="process">
+      <div class="section__head">
+        <p class="eyebrow"><span class="eyebrow__tick"></span>From melt to bench</p>
+        <h2 class="section__title chrome">The forge.</h2>
+      </div>
+      <ol class="forge" id="forge"></ol>
+    </section>
+
+    <!-- STATS BAND -->
+    <section class="band">
+      <div class="wrap band__inner">
+        <div class="band__item"><span class="band__n bronze-text" data-count-to="99.9" data-suffix="%">0</span><span class="band__l">Peak purity assayed</span></div>
+        <div class="band__item"><span class="band__n bronze-text" data-count-to="20">0</span><span class="band__l">Residues characterised</span></div>
+        <div class="band__item"><span class="band__n bronze-text" data-count-to="100" data-suffix="%">0</span><span class="band__l">Lots with certificates</span></div>
+        <div class="band__item"><span class="band__n bronze-text" data-count-to="0" data-prefix="&lt;" data-suffix="EU">0</span><span class="band__l">Endotoxin, target</span></div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="section wrap" id="faq">
+      <div class="section__head">
+        <p class="eyebrow"><span class="eyebrow__tick"></span>Briefing</p>
+        <h2 class="section__title chrome">Frequently asked.</h2>
+      </div>
+      <div class="accordion" id="accordion">
+        <details class="ac plate" open><summary>Are these products for human use?</summary><div class="ac__body"><p>No. All products are supplied strictly for <em>in-vitro</em> laboratory and research use. They are not drugs, supplements or cosmetics, and are not for human or veterinary consumption.</p></div></details>
+        <details class="ac plate"><summary>What ships with each lot?</summary><div class="ac__body"><p>A certificate of analysis: the HPLC purity trace, mass-spectrometry identity confirmation against the theoretical mass, an LAL endotoxin result, the lot number and analysis date.</p></div></details>
+        <details class="ac plate"><summary>How are peptides packaged and stored?</summary><div class="ac__body"><p>Lyophilized, sealed under inert argon, and shipped in insulated, temperature-monitored packaging. Store lyophilized vials frozen and protected from light.</p></div></details>
+        <details class="ac plate"><summary>Can I verify a lot after it arrives?</summary><div class="ac__body"><p>Yes. Every vial carries a lot number that resolves to its full analytical report for the life of the batch.</p></div></details>
+        <details class="ac plate"><summary>Who can order?</summary><div class="ac__body"><p>Orders are intended for qualified researchers, institutions and laboratories. By purchasing you confirm the products will be used solely for legitimate research in compliance with applicable law.</p></div></details>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="section wrap">
+      <div class="cta plate">
+        <div class="cta__glow" aria-hidden="true"></div>
+        <h2 class="chrome">Spec sheets, straight to your inbox.</h2>
+        <p>New lot releases, purity reports and restock alerts. Forged, not filler.</p>
+        <form class="cta__form" id="newsletter" novalidate>
+          <label class="visually-hidden" for="email">Email address</label>
+          <input type="email" id="email" placeholder="you@lab.org" autocomplete="email" required />
+          <button class="btn btn--bronze" type="submit">Request access</button>
+        </form>
+        <p class="cta__note" id="nlNote" role="status"></p>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="foot">
+    <div class="wrap foot__inner">
+      <div class="foot__brand">
+        <span class="brand__word"><span class="chrome">IRONCLAD</span><small>Peptides</small></span>
+        <p>Research-grade peptides, forged to one standard and traceable to a report.</p>
+      </div>
+      <nav class="foot__col"><h4>Shop</h4><a href="#catalog">Catalog</a><a href="#catalog">New lots</a><a href="#standard">Purity</a></nav>
+      <nav class="foot__col"><h4>Company</h4><a href="#process">Process</a><a href="#standard">Standard</a><a href="#faq">FAQ</a></nav>
+      <nav class="foot__col"><h4>Legal</h4><a href="#faq">Terms of use</a><a href="#faq">Research policy</a><a href="#faq">Shipping</a></nav>
+    </div>
+    <p class="foot__ruo wrap"><strong>For laboratory and research use only.</strong> The products offered here are intended solely for <em>in-vitro</em> research by qualified professionals. They are not drugs, foods, cosmetics or medical devices, and no therapeutic claim is made. Purchasers are responsible for compliance with all applicable laws. This is a fictional demonstration store.</p>
+    <p class="foot__bottom wrap"><span>© <span id="year"></span> IronClad Peptides.</span><span>Demo build · placeholder content</span></p>
+  </footer>
+
+  <!-- SELECTION DOCK -->
+  <div class="dock" id="dock" hidden>
+    <div class="wrap dock__inner">
+      <span class="dock__label"><b id="dockCount">0</b> in selection</span>
+      <span class="dock__total" id="dockTotal">$0.00</span>
+      <button class="btn btn--bronze" id="dockReview">Review selection →</button>
+    </div>
+  </div>
+
+  <!-- SELECTION PANEL -->
+  <div class="panel-overlay" id="panelOverlay" hidden></div>
+  <aside class="panel" id="panel" role="dialog" aria-modal="true" aria-label="Your selection" aria-hidden="true">
+    <header class="panel__head">
+      <h2 class="chrome">Selection</h2>
+      <button class="panel__close" id="panelClose" aria-label="Close">×</button>
+    </header>
+    <div class="panel__items" id="panelItems"></div>
+    <div class="panel__empty" id="panelEmpty"><p>Nothing selected yet.</p><button class="btn btn--steel" id="panelBrowse">Browse the catalog</button></div>
+    <footer class="panel__foot" id="panelFoot" hidden>
+      <div class="panel__row"><span>Subtotal</span><span id="panelSubtotal">$0.00</span></div>
+      <p class="panel__ruo">Research use only. Checkout is a demo — no payment is taken.</p>
+      <button class="btn btn--bronze btn--block" id="panelCheckout">Request &amp; checkout</button>
+    </footer>
+  </aside>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="assets/js/main.js" defer></script>
+</body>
+</html>
