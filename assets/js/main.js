@@ -103,10 +103,16 @@
       desc: "Coenzyme applied in cellular-metabolism and mitochondrial studies." },
     { id: "selank", name: "Selank", seq: "TKPRPGP", cat: "cognitive", mw: "751.9", purity: "99.2%", price: 66, size: "10 mg", tag: "In stock",
       desc: "Tuftsin-derived heptapeptide used in anxiolytic and neuro-signalling research." },
+    { id: "klow", name: "KLOW", seq: "GHK-Cu / BPC-157 / TB-500 / KPV", cat: "repair", mw: "—", purity: "99.0%", price: 110, size: "80 mg", tag: "New",
+      desc: "Multi-peptide recovery blend (GHK-Cu, BPC-157, TB-500, KPV) studied in tissue-repair and skin research." },
+    { id: "retatrutide", name: "Retatrutide", seq: "Modified peptide (39 aa)", cat: "metabolic", mw: "4731.4", purity: "99.3%", price: 95, size: "20 mg", tag: "New lot",
+      desc: "Triple GLP-1 / GIP / glucagon receptor agonist (“GLP-3”, Reta) used in metabolic-research models." },
+    { id: "motsc", name: "MOTS-c", seq: "MRWQEMGYIFYPRKLR", cat: "metabolic", mw: "2174.6", purity: "99.1%", price: 65, size: "10 mg", tag: "New",
+      desc: "Mitochondrial-derived 16-residue peptide studied in metabolic-regulation and exercise-response research." },
   ];
-  const CAT = { repair: "Repair", cognitive: "Cognitive", longevity: "Longevity", cosmetic: "Cosmetic" };
+  const CAT = { repair: "Repair", metabolic: "Metabolic", cognitive: "Cognitive", longevity: "Longevity", cosmetic: "Cosmetic" };
 
-  const PROD_KEY = "ironclad_forged_products_v1";
+  const PROD_KEY = "ironclad_forged_products_v2";
   function loadProducts() { try { const v = JSON.parse(localStorage.getItem(PROD_KEY)); return Array.isArray(v) && v.length ? v : null; } catch { return null; } }
   function saveProducts() { try { localStorage.setItem(PROD_KEY, JSON.stringify(PRODUCTS)); } catch {} }
   let PRODUCTS = loadProducts() || DEFAULTS.map((p) => ({ ...p }));
@@ -326,7 +332,7 @@
   function slugify(s) { return (String(s || "").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "")) || ("p" + Math.random().toString(36).slice(2, 7)); }
   function initEditor() {
     const modal = $("#editor"), rowsEl = $("#editRows");
-    const CATS = ["repair", "cognitive", "longevity", "cosmetic"];
+    const CATS = ["repair", "metabolic", "cognitive", "longevity", "cosmetic"];
     let draft = [];
 
     const rowHTML = (p, i) => `
