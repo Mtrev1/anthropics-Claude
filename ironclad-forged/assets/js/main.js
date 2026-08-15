@@ -9,6 +9,7 @@
   const $ = (s, c = document) => c.querySelector(s);
   const $$ = (s, c = document) => Array.from(c.querySelectorAll(s));
   const money = (n) => "$" + n.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  const esc = (s) => String(s == null ? "" : s).replace(/&/g, "&amp;").replace(/"/g, "&quot;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
 
   /* ---------- gear + emblem geometry ---------- */
   function gearPath(cx, cy, rO, rV, teeth) {
@@ -49,23 +50,41 @@
     </svg>`;
   }
 
-  /* ---------- metallic vial (animated) ---------- */
+  /* ---------- realistic lyophilized-peptide vial (static) ---------- */
   function vial() {
-    return `<svg class="vial" viewBox="0 0 40 64" width="78" style="--vg:#c2894b" aria-hidden="true">
-      <rect x="12.5" y="2" width="15" height="7" rx="1.4" fill="url(#chromeG)" stroke="#0a0b0d" stroke-width=".8"/>
-      <rect x="14.5" y="9" width="11" height="3.6" fill="#2a2e35"/>
-      <rect x="9.5" y="12.6" width="21" height="48" rx="5.5" fill="url(#steelCyl)" stroke="#0a0b0d" stroke-width="1"/>
-      <path class="vfill" d="M11.5 46 h17 v8.5 a4 4 0 0 1 -4 4 h-9 a4 4 0 0 1 -4 -4 z" fill="url(#bronzeCyl)"/>
-      <line x1="11.5" y1="46" x2="28.5" y2="46" stroke="#f0b972" stroke-width="1"/>
-      <rect x="9.5" y="28" width="21" height="12.5" fill="#0d0f12" opacity=".92"/>
-      <line x1="12" y1="32" x2="28" y2="32" stroke="#c2894b" stroke-width="1" opacity=".75"/>
-      <line x1="12" y1="35.5" x2="24" y2="35.5" stroke="#8a8f99" stroke-width="1" opacity=".6"/>
-      <ellipse cx="15" cy="22" rx="2" ry="8" fill="#f4f6fa" opacity=".32"/>
+    return `<svg class="vial" viewBox="0 0 64 132" width="84" aria-hidden="true">
+      <ellipse cx="32" cy="126" rx="19" ry="3.6" fill="#000" opacity=".5"/>
+      <!-- glass body: neck, shoulder, rounded base -->
+      <path d="M22,33 L42,33 L42,35 Q48,37.5 48,47 L48,110 Q48,118 40,118 L24,118 Q16,118 16,110 L16,47 Q16,37.5 22,35 Z"
+        fill="url(#glassBody)" stroke="rgba(255,255,255,.16)" stroke-width="1"/>
+      <!-- lyophilized cake (white, uneven top) -->
+      <path d="M18,99 Q25,95.5 32,97.5 Q39,99.5 46,97 L46,109 Q46,115 40,115 L24,115 Q18,115 18,109 Z" fill="url(#cakeG)"/>
+      <path d="M18,99 Q25,95.5 32,97.5 Q39,99.5 46,97" fill="none" stroke="#ffffff" stroke-width="1" opacity=".55"/>
+      <!-- printed label -->
+      <rect x="16" y="66" width="32" height="18" fill="rgba(236,236,230,.94)"/>
+      <rect x="16" y="66" width="2.6" height="18" fill="#c2894b"/>
+      <line x1="22" y1="71" x2="43" y2="71" stroke="#33363b" stroke-width="1.5"/>
+      <line x1="22" y1="75.5" x2="39" y2="75.5" stroke="#8a8f99" stroke-width="1"/>
+      <line x1="22" y1="79" x2="41" y2="79" stroke="#8a8f99" stroke-width="1"/>
+      <!-- glass highlights + shaded edge -->
+      <rect x="21" y="47" width="3.4" height="60" rx="1.7" fill="#ffffff" opacity=".16"/>
+      <rect x="27" y="49" width="1.6" height="52" rx="1" fill="#ffffff" opacity=".10"/>
+      <path d="M45.5,47 L45.5,110 Q45.5,116 40.5,117" fill="none" stroke="#000" stroke-width="2.2" opacity=".16"/>
+      <!-- rubber stopper -->
+      <rect x="23.5" y="26" width="17" height="9" rx="1.5" fill="#3f4248"/>
+      <rect x="23.5" y="26" width="17" height="3" fill="#4b4f55"/>
+      <!-- aluminum crimp seal -->
+      <rect x="22" y="19" width="20" height="8" fill="url(#aluCyl)"/>
+      <g stroke="#565b64" stroke-width=".5" opacity=".5"><line x1="26" y1="20" x2="26" y2="26"/><line x1="30" y1="20" x2="30" y2="26"/><line x1="34" y1="20" x2="34" y2="26"/><line x1="38" y1="20" x2="38" y2="26"/></g>
+      <!-- bronze flip-off cap -->
+      <rect x="21" y="14" width="22" height="6" rx="1" fill="url(#bronzeG)"/>
+      <ellipse cx="32" cy="14" rx="11" ry="3.4" fill="url(#bronzeG)" stroke="#5c3d1c" stroke-width=".5"/>
+      <ellipse cx="32" cy="13.4" rx="4.4" ry="1.4" fill="#e6ab68" opacity=".85"/>
     </svg>`;
   }
 
   /* ---------- data ---------- */
-  const PRODUCTS = [
+  const DEFAULTS = [
     { id: "bpc157", name: "BPC-157", seq: "GEPPPGKPADDAGLV", cat: "repair", mw: "1419.5", purity: "99.6%", price: 54, size: "5 mg", tag: "Best seller",
       desc: "Fifteen-residue body-protection compound studied for tissue repair and angiogenesis." },
     { id: "tb500", name: "TB-500", seq: "LKKTETQ", cat: "repair", mw: "889.0", purity: "99.3%", price: 62, size: "5 mg", tag: "In stock",
@@ -86,6 +105,11 @@
       desc: "Tuftsin-derived heptapeptide used in anxiolytic and neuro-signalling research." },
   ];
   const CAT = { repair: "Repair", cognitive: "Cognitive", longevity: "Longevity", cosmetic: "Cosmetic" };
+
+  const PROD_KEY = "ironclad_forged_products_v1";
+  function loadProducts() { try { const v = JSON.parse(localStorage.getItem(PROD_KEY)); return Array.isArray(v) && v.length ? v : null; } catch { return null; } }
+  function saveProducts() { try { localStorage.setItem(PROD_KEY, JSON.stringify(PRODUCTS)); } catch {} }
+  let PRODUCTS = loadProducts() || DEFAULTS.map((p) => ({ ...p }));
 
   /* ---------- catalog ---------- */
   const grid = $("#grid");
@@ -168,9 +192,6 @@
     ];
     const one = creds.map(([ic, t]) => `<span class="creds__item">${ICONS[ic]}${t}</span>`).join("");
     $("#credTrack").innerHTML = one + one;
-    const tick = ["Research use only", "Not for human consumption", "HPLC ≥ 99%", "Mass-spec verified", "COA per lot", "Cold-chain shipped"];
-    const t = tick.map((x) => `<span>${x}</span><b>◆</b>`).join("");
-    $("#tickerTrack").innerHTML = t + t;
   }
 
   /* ---------- selection (localStorage) ---------- */
@@ -189,6 +210,8 @@
   const dock = $("#dock"), dockCount = $("#dockCount"), dockTotal = $("#dockTotal"), selCount = $("#selCount");
   const panelItems = $("#panelItems"), panelEmpty = $("#panelEmpty"), panelFoot = $("#panelFoot"), panelSubtotal = $("#panelSubtotal");
   function syncUI() {
+    // drop any selection whose product no longer exists (after edits)
+    Object.keys(sel).forEach((id) => { if (!PRODUCTS.some((p) => p.id === id)) delete sel[id]; });
     const ids = Object.keys(sel);
     const count = ids.reduce((s, id) => s + sel[id], 0);
     const total = ids.reduce((s, id) => s + PRODUCTS.find((p) => p.id === id).price * sel[id], 0);
@@ -299,6 +322,65 @@
     $("#ageBack").addEventListener("click", () => { deny.hidden = true; ask.hidden = false; $("#ageYes").focus(); });
   }
 
+  /* ---------- product editor ---------- */
+  function slugify(s) { return (String(s || "").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "")) || ("p" + Math.random().toString(36).slice(2, 7)); }
+  function initEditor() {
+    const modal = $("#editor"), rowsEl = $("#editRows");
+    const CATS = ["repair", "cognitive", "longevity", "cosmetic"];
+    let draft = [];
+
+    const rowHTML = (p, i) => `
+      <div class="erow" data-i="${i}">
+        <div class="erow__grid">
+          <label>Name<input data-f="name" value="${esc(p.name)}" /></label>
+          <label>Category<select data-f="cat">${CATS.map((c) => `<option value="${c}"${c === p.cat ? " selected" : ""}>${CAT[c]}</option>`).join("")}</select></label>
+          <label>Size<input data-f="size" value="${esc(p.size)}" /></label>
+          <label>Price ($)<input data-f="price" type="number" min="0" step="0.01" value="${esc(p.price)}" /></label>
+          <label>Purity<input data-f="purity" value="${esc(p.purity)}" /></label>
+          <label>MW<input data-f="mw" value="${esc(p.mw)}" /></label>
+          <label class="erow__wide">Sequence<input data-f="seq" value="${esc(p.seq)}" /></label>
+          <label class="erow__wide">Description<textarea data-f="desc" rows="2">${esc(p.desc)}</textarea></label>
+        </div>
+        <button class="erow__del" data-del="${i}">Remove</button>
+      </div>`;
+    const render = () => { rowsEl.innerHTML = draft.map(rowHTML).join(""); };
+    const readDraft = () => $$(".erow", rowsEl).forEach((row) => {
+      const p = draft[+row.dataset.i]; if (!p) return;
+      $$("[data-f]", row).forEach((f) => { p[f.dataset.f] = f.value; });
+    });
+
+    function open() { draft = PRODUCTS.map((p) => ({ ...p })); render(); modal.hidden = false; document.body.style.overflow = "hidden"; requestAnimationFrame(() => modal.classList.add("is-open")); $("#editClose").focus(); }
+    function close() { modal.classList.remove("is-open"); document.body.style.overflow = ""; setTimeout(() => { modal.hidden = true; }, 300); }
+
+    $("#editOpen").addEventListener("click", open);
+    $("#editClose").addEventListener("click", close);
+    $("#editCancel").addEventListener("click", close);
+    modal.addEventListener("click", (e) => { if (e.target === modal) close(); });
+    document.addEventListener("keydown", (e) => { if (e.key === "Escape" && !modal.hidden) close(); });
+
+    rowsEl.addEventListener("click", (e) => { const del = e.target.closest("[data-del]"); if (del) { readDraft(); draft.splice(+del.dataset.del, 1); render(); } });
+    $("#editAdd").addEventListener("click", () => { readDraft(); draft.push({ id: "", name: "New compound", cat: "repair", seq: "", mw: "", purity: "99.0%", price: 0, size: "5 mg", desc: "" }); render(); rowsEl.lastElementChild.scrollIntoView({ block: "center" }); });
+    $("#editReset").addEventListener("click", () => { draft = DEFAULTS.map((p) => ({ ...p })); render(); toast("Reverted to default catalog (unsaved)"); });
+    $("#editExport").addEventListener("click", () => {
+      readDraft(); const json = JSON.stringify(draft, null, 2);
+      if (navigator.clipboard) navigator.clipboard.writeText(json).then(() => toast("Product JSON copied to clipboard")).catch(() => toast("See console for JSON"));
+      else toast("See console for JSON");
+      console.log("IRONCLAD COMPOUNDS — products JSON:\n" + json);
+    });
+    $("#editSave").addEventListener("click", () => {
+      readDraft(); const seen = {};
+      PRODUCTS = draft.filter((p) => (p.name || "").trim()).map((p) => {
+        let id = (p.id && p.id.trim()) ? p.id.trim() : slugify(p.name);
+        while (seen[id]) id += "-x"; seen[id] = 1;
+        return { ...p, id, price: parseFloat(p.price) || 0 };
+      });
+      saveProducts(); renderCatalog();
+      const active = $(".chip.is-active");
+      if (active) { const f = active.dataset.filter; $$(".card").forEach((c) => c.classList.toggle("is-hidden", !(f === "all" || c.dataset.cat === f))); }
+      syncUI(); close(); toast("Catalog updated");
+    });
+  }
+
   /* ---------- init ---------- */
   document.addEventListener("DOMContentLoaded", () => {
     $("#navEmblem").innerHTML = emblem();
@@ -316,5 +398,6 @@
     counters();
     initNav();
     initNewsletter();
+    initEditor();
   });
 })();
