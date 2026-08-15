@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#05070c" />
+  <title>Axiom Peptides — Research-Grade Peptides, Verified to the Molecule</title>
+  <meta name="description" content="Axiom Peptides supplies HPLC-verified, ≥99% purity research peptides with third-party certificates of analysis, cold-chain logistics, and batch-level traceability. For laboratory research use only." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/styles.css" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ctext y='26' font-size='26'%3E%F0%9F%A7%AC%3C/text%3E%3C/svg%3E" />
+</head>
+<body>
+  <!-- Age verification gate -->
+  <div class="agegate" id="ageGate" role="dialog" aria-modal="true" aria-labelledby="ageGateTitle" aria-describedby="ageGateDesc">
+    <div class="agegate__backdrop" aria-hidden="true"></div>
+    <div class="agegate__card" id="ageGateAsk">
+      <svg class="agegate__mark" viewBox="0 0 40 40" width="46" height="46" aria-hidden="true">
+        <defs>
+          <linearGradient id="ageGrad" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="#4ee6c4" /><stop offset="1" stop-color="#6a8bff" />
+          </linearGradient>
+        </defs>
+        <g stroke="url(#ageGrad)" stroke-width="2.4" fill="none" stroke-linecap="round">
+          <path d="M12 4 C28 12, 12 20, 28 28 C12 32, 28 36, 12 36" opacity="0.95"/>
+          <path d="M28 4 C12 12, 28 20, 12 28 C28 32, 12 36, 28 36" opacity="0.6"/>
+          <line x1="14.5" y1="9" x2="25.5" y2="9"/><line x1="14.5" y1="20" x2="25.5" y2="20"/><line x1="14.5" y1="31" x2="25.5" y2="31"/>
+        </g>
+      </svg>
+      <span class="agegate__pill">Age verification</span>
+      <h1 class="agegate__title" id="ageGateTitle">Are you 21 or older?</h1>
+      <p class="agegate__desc" id="ageGateDesc">
+        You must be at least <strong>21 years of age</strong> to enter this site. All products
+        are supplied strictly for laboratory and research use only. By entering, you confirm you
+        meet the minimum age requirement and agree to the terms of use.
+      </p>
+      <div class="agegate__actions">
+        <button class="btn btn--primary agegate__btn" id="ageYes">Yes, I am 21 or older</button>
+        <button class="btn btn--ghost agegate__btn" id="ageNo">No</button>
+      </div>
+    </div>
+
+    <div class="agegate__card agegate__card--deny" id="ageGateDeny" hidden>
+      <div class="agegate__deny-mark" aria-hidden="true">⛔</div>
+      <h1 class="agegate__title">Access restricted</h1>
+      <p class="agegate__desc">
+        We're sorry, but you must be at least <strong>21 years of age</strong> to access this
+        website. Please come back when you meet the minimum age requirement.
+      </p>
+      <button class="btn btn--ghost agegate__btn" id="ageBack">Go back</button>
+    </div>
+  </div>
+
+  <!-- Skip link for a11y -->
+  <a class="skip-link" href="#catalog">Skip to catalog</a>
+
+  <!-- Research-use compliance banner -->
+  <div class="compliance-bar" role="note">
+    <span class="dot" aria-hidden="true"></span>
+    All products are sold <strong>for laboratory &amp; research use only</strong> — not for human or veterinary consumption.
+  </div>
+
+  <!-- Navigation -->
+  <header class="nav" id="nav">
+    <div class="nav__inner">
+      <a href="#top" class="brand" aria-label="Axiom Peptides home">
+        <svg class="brand__mark" viewBox="0 0 40 40" width="34" height="34" aria-hidden="true">
+          <defs>
+            <linearGradient id="helixGrad" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="#4ee6c4" />
+              <stop offset="1" stop-color="#6a8bff" />
+            </linearGradient>
+          </defs>
+          <g stroke="url(#helixGrad)" stroke-width="2.4" fill="none" stroke-linecap="round">
+            <path d="M12 4 C28 12, 12 20, 28 28 C12 32, 28 36, 12 36" opacity="0.95"/>
+            <path d="M28 4 C12 12, 28 20, 12 28 C28 32, 12 36, 28 36" opacity="0.6"/>
+            <line x1="14.5" y1="9" x2="25.5" y2="9"/>
+            <line x1="14.5" y1="20" x2="25.5" y2="20"/>
+            <line x1="14.5" y1="31" x2="25.5" y2="31"/>
+          </g>
+        </svg>
+        <span class="brand__word">AXIOM<span class="brand__sub">PEPTIDES</span></span>
+      </a>
+
+      <nav class="nav__links" aria-label="Primary">
+        <a href="#catalog">Catalog</a>
+        <a href="#quality">Quality</a>
+        <a href="#process">Process</a>
+        <a href="#faq">FAQ</a>
+      </nav>
+
+      <div class="nav__actions">
+        <button class="btn btn--ghost nav__cart" id="cartToggle" aria-haspopup="dialog" aria-label="Open cart">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="9" cy="20" r="1.4"/><circle cx="18" cy="20" r="1.4"/>
+            <path d="M2.5 3h2.2l2.3 12.2a1.6 1.6 0 0 0 1.6 1.3h8.4a1.6 1.6 0 0 0 1.6-1.2L21.5 7H6"/>
+          </svg>
+          <span class="nav__cart-count" id="cartCount" data-count="0">0</span>
+        </button>
+        <button class="nav__burger" id="burger" aria-label="Toggle menu" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile menu -->
+  <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+    <a href="#catalog">Catalog</a>
+    <a href="#quality">Quality</a>
+    <a href="#process">Process</a>
+    <a href="#faq">FAQ</a>
+  </div>
+
+  <main id="top">
+    <!-- HERO -->
+    <section class="hero" id="hero">
+      <canvas class="hero__canvas" id="molecule" aria-hidden="true"></canvas>
+      <div class="hero__glow" aria-hidden="true"></div>
+      <div class="hero__inner">
+        <div class="badge reveal">
+          <span class="badge__pulse" aria-hidden="true"></span>
+          Third-party verified · HPLC &amp; mass-spec
+        </div>
+        <h1 class="hero__title reveal">
+          Research-grade peptides,<br />
+          <span class="grad-text">verified to the molecule.</span>
+        </h1>
+        <p class="hero__lede reveal">
+          Every batch is independently assayed for identity and purity, cold-chain
+          shipped, and traceable to its certificate of analysis. Precision chemistry
+          for laboratories that can't afford ambiguity.
+        </p>
+        <div class="hero__cta reveal">
+          <a href="#catalog" class="btn btn--primary">Browse catalog</a>
+          <a href="#quality" class="btn btn--ghost">See our testing →</a>
+        </div>
+        <dl class="hero__stats reveal">
+          <div><dt data-count-to="99.4" data-suffix="%">0%</dt><dd>Median assayed purity</dd></div>
+          <div><dt data-count-to="100" data-suffix="%">0%</dt><dd>Batches with COA</dd></div>
+          <div><dt data-count-to="42" data-suffix="h">0h</dt><dd>Avg. dispatch time</dd></div>
+        </dl>
+      </div>
+      <div class="scroll-hint" aria-hidden="true"><span></span></div>
+    </section>
+
+    <!-- MARQUEE / trust -->
+    <section class="trust" aria-label="Certifications and standards">
+      <div class="marquee">
+        <div class="marquee__track">
+          <span>ISO 17025 partnered labs</span><span aria-hidden="true">✦</span>
+          <span>HPLC purity ≥ 99%</span><span aria-hidden="true">✦</span>
+          <span>Mass-spec identity confirmed</span><span aria-hidden="true">✦</span>
+          <span>Endotoxin screened</span><span aria-hidden="true">✦</span>
+          <span>Lyophilized &amp; sealed under argon</span><span aria-hidden="true">✦</span>
+          <span>Batch-level traceability</span><span aria-hidden="true">✦</span>
+          <!-- duplicate for seamless loop -->
+          <span>ISO 17025 partnered labs</span><span aria-hidden="true">✦</span>
+          <span>HPLC purity ≥ 99%</span><span aria-hidden="true">✦</span>
+          <span>Mass-spec identity confirmed</span><span aria-hidden="true">✦</span>
+          <span>Endotoxin screened</span><span aria-hidden="true">✦</span>
+          <span>Lyophilized &amp; sealed under argon</span><span aria-hidden="true">✦</span>
+          <span>Batch-level traceability</span><span aria-hidden="true">✦</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- CATALOG -->
+    <section class="section catalog" id="catalog">
+      <div class="section__head reveal">
+        <p class="eyebrow">The catalog</p>
+        <h2 class="section__title">Peptides, filtered by what your protocol needs.</h2>
+        <p class="section__sub">Prices per vial. Every listing links to its batch certificate of analysis. Research use only.</p>
+      </div>
+
+      <div class="filters reveal" id="filters" role="tablist" aria-label="Filter catalog">
+        <button class="chip is-active" data-filter="all" role="tab" aria-selected="true">All</button>
+        <button class="chip" data-filter="repair" role="tab" aria-selected="false">Tissue &amp; recovery</button>
+        <button class="chip" data-filter="metabolic" role="tab" aria-selected="false">Metabolic</button>
+        <button class="chip" data-filter="longevity" role="tab" aria-selected="false">Longevity</button>
+        <button class="chip" data-filter="cosmetic" role="tab" aria-selected="false">Cosmetic</button>
+      </div>
+
+      <div class="grid" id="productGrid" aria-live="polite"><!-- products injected by JS --></div>
+    </section>
+
+    <!-- QUALITY / SCIENCE -->
+    <section class="section quality" id="quality">
+      <div class="quality__grid">
+        <div class="quality__copy reveal">
+          <p class="eyebrow">Verification, not vibes</p>
+          <h2 class="section__title">Purity you can read off a chromatogram.</h2>
+          <p class="section__sub">
+            We don't ask you to trust a label. Each batch ships with an independent
+            certificate of analysis: HPLC purity trace, mass-spectrometry identity
+            confirmation, and an endotoxin screen. Scan the vial, read the data.
+          </p>
+          <ul class="checklist">
+            <li><span>HPLC purity assay</span> quantified area-under-curve, target ≥ 99%.</li>
+            <li><span>Mass-spec identity</span> molecular weight confirmed against theoretical.</li>
+            <li><span>Endotoxin screen</span> LAL-tested, results on every certificate.</li>
+            <li><span>Batch traceability</span> every vial maps to a lot and a report.</li>
+          </ul>
+          <a href="#catalog" class="btn btn--primary">Shop verified batches</a>
+        </div>
+
+        <figure class="chroma reveal" aria-label="Illustrative HPLC purity chromatogram">
+          <figcaption class="chroma__cap">
+            <span>BATCH #AX-2471</span>
+            <span class="chroma__pure">99.6% <em>purity</em></span>
+          </figcaption>
+          <svg class="chroma__svg" viewBox="0 0 480 220" preserveAspectRatio="none" aria-hidden="true">
+            <g class="chroma__grid" stroke="rgba(255,255,255,.06)" stroke-width="1">
+              <line x1="0" y1="44" x2="480" y2="44"/><line x1="0" y1="88" x2="480" y2="88"/>
+              <line x1="0" y1="132" x2="480" y2="132"/><line x1="0" y1="176" x2="480" y2="176"/>
+            </g>
+            <path class="chroma__trace" d="M0,200 L120,199 L150,198 Q168,196 176,150 Q184,20 196,20 Q208,20 216,150 Q224,197 244,199 L300,200 L322,199 Q330,198 336,182 Q342,168 348,182 Q354,199 372,200 L480,200"
+              fill="none" stroke="url(#chromaGrad)" stroke-width="2.6" stroke-linejoin="round"/>
+            <defs>
+              <linearGradient id="chromaGrad" x1="0" y1="0" x2="1" y2="0">
+                <stop offset="0" stop-color="#4ee6c4"/><stop offset="1" stop-color="#6a8bff"/>
+              </linearGradient>
+            </defs>
+          </svg>
+          <div class="chroma__peaks">
+            <span style="left:40%">Target peptide</span>
+            <span style="left:70%">Residual &lt;0.4%</span>
+          </div>
+        </figure>
+      </div>
+
+      <div class="features">
+        <article class="feature reveal">
+          <div class="feature__icon">❄️</div>
+          <h3>Cold-chain logistics</h3>
+          <p>Lyophilized, sealed under inert gas, and shipped with insulated packaging and temperature indicators.</p>
+        </article>
+        <article class="feature reveal">
+          <div class="feature__icon">🔬</div>
+          <h3>Independent assays</h3>
+          <p>Testing is run by partnered ISO 17025 laboratories — not in-house marketing numbers.</p>
+        </article>
+        <article class="feature reveal">
+          <div class="feature__icon">📄</div>
+          <h3>Certificate on every vial</h3>
+          <p>Each lot carries a scannable COA with its full analytical panel and expiry.</p>
+        </article>
+        <article class="feature reveal">
+          <div class="feature__icon">🛡️</div>
+          <h3>Batch traceability</h3>
+          <p>Every order records its lot number, so a result can always be traced to a report.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- PROCESS -->
+    <section class="section process" id="process">
+      <div class="section__head reveal">
+        <p class="eyebrow">From vial to bench</p>
+        <h2 class="section__title">Four steps. No surprises.</h2>
+      </div>
+      <ol class="steps">
+        <li class="step reveal"><span class="step__n">01</span><h3>Order</h3><p>Select your peptides and lot. Purity data is on the listing before you add to cart.</p></li>
+        <li class="step reveal"><span class="step__n">02</span><h3>Verify</h3><p>We attach the batch COA to your confirmation — review it before anything ships.</p></li>
+        <li class="step reveal"><span class="step__n">03</span><h3>Cold ship</h3><p>Dispatched within ~42 hours in insulated, temperature-monitored packaging.</p></li>
+        <li class="step reveal"><span class="step__n">04</span><h3>Reconcile</h3><p>Scan the vial to pull its certificate any time — traceable for the life of the lot.</p></li>
+      </ol>
+    </section>
+
+    <!-- TESTIMONIALS -->
+    <section class="section quotes" aria-label="What researchers say">
+      <div class="section__head reveal">
+        <p class="eyebrow">Trusted at the bench</p>
+        <h2 class="section__title">Chemistry teams that stopped second-guessing their reagents.</h2>
+      </div>
+      <div class="quotes__grid">
+        <blockquote class="quote reveal">
+          <p>“The COA-per-batch model ended a recurring argument in our lab. If a result looks off, we can rule the reagent in or out in minutes.”</p>
+          <footer><span class="quote__avatar" aria-hidden="true">DR</span><cite>Dr. R. Okafor<small>Analytical chemistry core</small></cite></footer>
+        </blockquote>
+        <blockquote class="quote reveal">
+          <p>“Cold-chain actually intact on arrival, purity matching the certificate. That consistency is the whole point for us.”</p>
+          <footer><span class="quote__avatar" aria-hidden="true">LM</span><cite>L. Marchetti<small>Contract research org</small></cite></footer>
+        </blockquote>
+        <blockquote class="quote reveal">
+          <p>“Traceability from vial back to a specific lot report is exactly what our QA process needed. Nobody else made it this easy.”</p>
+          <footer><span class="quote__avatar" aria-hidden="true">ST</span><cite>S. Tan<small>University research lab</small></cite></footer>
+        </blockquote>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="section faq" id="faq">
+      <div class="section__head reveal">
+        <p class="eyebrow">Before you ask</p>
+        <h2 class="section__title">Frequently asked</h2>
+      </div>
+      <div class="accordion" id="accordion">
+        <details class="ac reveal"><summary>Are these products for human use?</summary><div class="ac__body"><p>No. All products are supplied strictly for laboratory and <em>in-vitro</em> research use. They are not drugs, supplements, or cosmetics, and are not for human or veterinary consumption, ingestion, or any therapeutic use.</p></div></details>
+        <details class="ac reveal"><summary>What does the certificate of analysis include?</summary><div class="ac__body"><p>Every batch COA includes the HPLC purity trace with quantified area-under-curve, mass-spectrometry identity confirmation against theoretical molecular weight, an LAL endotoxin screen, the lot number, and the analysis date.</p></div></details>
+        <details class="ac reveal"><summary>How are the peptides shipped and stored?</summary><div class="ac__body"><p>Peptides are lyophilized and sealed under inert gas, then shipped in insulated packaging with temperature indicators. On receipt, store lyophilized vials frozen and protected from light per the guidance included with your order.</p></div></details>
+        <details class="ac reveal"><summary>Can I verify a batch after it arrives?</summary><div class="ac__body"><p>Yes. Each vial carries a scannable lot identifier that resolves to its full analytical report, so any result can be traced back to its certificate for the life of the lot.</p></div></details>
+        <details class="ac reveal"><summary>Who can order?</summary><div class="ac__body"><p>Orders are intended for qualified researchers, institutions, and laboratories. By purchasing you confirm the products will be used solely for legitimate research purposes in compliance with all applicable laws in your jurisdiction.</p></div></details>
+      </div>
+    </section>
+
+    <!-- CTA / newsletter -->
+    <section class="section cta">
+      <div class="cta__card reveal">
+        <div class="cta__glow" aria-hidden="true"></div>
+        <h2>New batch releases, straight to your inbox.</h2>
+        <p>Purity reports, restock alerts, and method notes. No noise.</p>
+        <form class="cta__form" id="newsletter" novalidate>
+          <label class="visually-hidden" for="email">Email address</label>
+          <input type="email" id="email" name="email" placeholder="you@lab.org" required autocomplete="email" />
+          <button class="btn btn--primary" type="submit">Notify me</button>
+        </form>
+        <p class="cta__note" id="nlNote" role="status"></p>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer__grid">
+      <div class="footer__brand">
+        <a href="#top" class="brand brand--footer">
+          <span class="brand__word">AXIOM<span class="brand__sub">PEPTIDES</span></span>
+        </a>
+        <p>Precision research peptides, verified to the molecule and traceable to a report.</p>
+      </div>
+      <nav class="footer__col" aria-label="Shop"><h4>Shop</h4><a href="#catalog">Catalog</a><a href="#catalog">New batches</a><a href="#quality">Purity data</a></nav>
+      <nav class="footer__col" aria-label="Company"><h4>Company</h4><a href="#process">Process</a><a href="#quality">Quality</a><a href="#faq">FAQ</a></nav>
+      <nav class="footer__col" aria-label="Legal"><h4>Legal</h4><a href="#faq">Terms of use</a><a href="#faq">Research policy</a><a href="#faq">Shipping</a></nav>
+    </div>
+    <div class="footer__disclaimer">
+      <p><strong>For laboratory and research use only.</strong> The products offered on this website are intended solely for <em>in-vitro</em> research and laboratory experimentation by qualified professionals. They are <strong>not</strong> intended for human or animal use, and are not drugs, foods, cosmetics, or medical devices. Nothing herein is a claim of therapeutic benefit. Purchasers are responsible for compliance with all applicable laws and regulations. This is a fictional demonstration store.</p>
+    </div>
+    <div class="footer__bottom">
+      <span>© <span id="year"></span> Axiom Peptides. All rights reserved.</span>
+      <span class="footer__made">Demo build · placeholder content</span>
+    </div>
+  </footer>
+
+  <!-- CART DRAWER -->
+  <div class="drawer-overlay" id="drawerOverlay" hidden></div>
+  <aside class="drawer" id="cartDrawer" role="dialog" aria-modal="true" aria-label="Shopping cart" aria-hidden="true">
+    <header class="drawer__head">
+      <h2>Your cart</h2>
+      <button class="drawer__close" id="cartClose" aria-label="Close cart">&times;</button>
+    </header>
+    <div class="drawer__items" id="cartItems"><!-- items injected --></div>
+    <div class="drawer__empty" id="cartEmpty">
+      <div class="drawer__empty-mark" aria-hidden="true">🧪</div>
+      <p>Your cart is empty.</p>
+      <button class="btn btn--ghost" id="cartKeepShopping">Browse catalog</button>
+    </div>
+    <footer class="drawer__foot" id="cartFoot" hidden>
+      <div class="drawer__row"><span>Subtotal</span><span id="cartSubtotal">$0.00</span></div>
+      <p class="drawer__ruo">For research use only. Checkout is a demo — no payment is taken.</p>
+      <button class="btn btn--primary btn--block" id="checkoutBtn">Checkout</button>
+    </footer>
+  </aside>
+
+  <!-- toast -->
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script src="assets/js/main.js" defer></script>
+</body>
+</html>

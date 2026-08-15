@@ -1,42 +1,39 @@
-# Axiom Peptides — research peptides storefront
+# IronClad Compounds
 
-A premium, single-page e-commerce site for a research-grade peptides supplier.
-Dark, high-end aesthetic with elegant, performance-conscious motion. **Demo
-build with placeholder content** — for laboratory and research use only.
+The canonical marketing site for **IronClad Compounds** — a research-compounds
+storefront with an industrial identity derived from the brand's crest logo:
+brushed steel + a single bronze accent, a shield-and-gear emblem, riveted metal
+plates, chrome-gradient headings and chamfered buttons. **Demo build with
+placeholder content — for laboratory and research use only.**
+
+Vanilla HTML/CSS/JS. No build step, no runtime dependencies.
 
 ## Highlights
 
-- **Age verification gate** — a "must be 21 or older" screen on first visit with
-  Yes / No options. "Yes" enters and is remembered via `localStorage`; "No"
-  shows an access-restricted screen. Locks scroll and traps focus while open.
-- **Animated molecular hero** — a live particle-network canvas that scales its
-  node count to viewport size, caps DPR, and pauses when off-screen.
-- **Working cart** — add/remove, quantity steppers, live subtotal, slide-in
-  drawer, and `localStorage` persistence. Demo checkout (no payment).
-- **Filterable catalog** — nine research peptides with purity badges, sizes,
-  RUO tags, and per-batch COA links; filter chips animate the grid.
-- **Quality section** — animated HPLC purity chromatogram (SVG stroke draw).
-- **Motion done right** — scroll reveals, count-up stats, and a marquee, all
-  GPU-friendly (transform/opacity) and fully disabled under
-  `prefers-reduced-motion`.
-- **Responsive** — fluid from 320px up; mobile hamburger nav; no horizontal
-  scroll.
-- **Accessible** — skip link, focus-visible rings, ARIA on the cart dialog and
-  nav, keyboard-dismissable drawer.
-- **Compliance-forward** — a persistent "research use only" banner plus a full
-  legal disclaimer in the footer, appropriate for this business type.
+- **Logo-derived design system** — palette (steel + bronze), type (Oswald /
+  Barlow / Chakra Petch), and components all trace back to the crest.
+- **Recreated crest emblem + ambient gear**, drawn in SVG.
+- **21+ age gate** with Yes/No, an access-restricted screen, focus trap and
+  `localStorage` memory.
+- **Catalog** of realistic product vials (glass body, aluminum crimp, bronze
+  flip-off cap, lyophilized cake) with filters and add-to-selection.
+- **In-page product editor** ("Edit products") — change every field, add/remove
+  products, export JSON, reset to defaults; saves to `localStorage`.
+- **Selection dock + slide-in panel**, credential marquee, "no weak links"
+  pillars, the forge process, a stats band, FAQ and a compliance footer.
+- Committed single dark theme; motion respects `prefers-reduced-motion`;
+  responsive down to a single column.
 
 ## Structure
 
 ```
-index.html             # markup + all sections
-assets/css/styles.css  # design system (tokens, dark theme, responsive)
-assets/js/main.js      # catalog, cart, filters, canvas, reveals — vanilla JS
+index.html             # the site
+assets/css/styles.css  # forged design system
+assets/js/main.js      # emblem/vial generators, catalog, editor, selection
+axiom/                 # archived earlier concept (Axiom Peptides, dark premium)
 ```
 
 ## Run
-
-No build step. Open `index.html`, or serve the folder:
 
 ```bash
 python3 -m http.server 8000   # then visit http://localhost:8000
@@ -44,10 +41,11 @@ python3 -m http.server 8000   # then visit http://localhost:8000
 
 ## Customizing
 
-- **Products** — edit the `PRODUCTS` array in `assets/js/main.js`.
-- **Brand & colors** — the palette lives in the `:root` block of
-  `assets/css/styles.css` (`--teal`, `--blue`, `--grad`, …).
-- **Copy** — all text is inline in `index.html`.
+- **Products** — edit in-browser via **Edit products**, or change the `DEFAULTS`
+  array in `assets/js/main.js`.
+- **Brand colors** — the `--bronze` / steel tokens in the `:root` block of
+  `assets/css/styles.css`.
+- **Copy** — inline in `index.html`.
 
-> Fonts load from Google Fonts with a full system-font fallback stack, so the
-> site remains fully styled even if the CDN is unavailable.
+> The product editor is client-side (saves to the visitor's browser). Persisting
+> edits for all visitors would require a backend.
