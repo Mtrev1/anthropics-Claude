@@ -83,36 +83,37 @@
     </svg>`;
   }
 
-  /* ---------- data ---------- */
+  /* ---------- data (from inventory sheet; sequence/MW/purity are placeholders to confirm) ---------- */
   const DEFAULTS = [
-    { id: "bpc157", name: "BPC-157", seq: "GEPPPGKPADDAGLV", cat: "repair", mw: "1419.5", purity: "99.6%", price: 54, size: "5 mg", tag: "Best seller",
-      desc: "Fifteen-residue body-protection compound studied for tissue repair and angiogenesis." },
-    { id: "tb500", name: "TB-500", seq: "LKKTETQ", cat: "repair", mw: "889.0", purity: "99.3%", price: 62, size: "5 mg", tag: "In stock",
-      desc: "Active thymosin β4 fragment used in cell-migration and recovery research." },
-    { id: "ghkcu", name: "GHK-Cu", seq: "GHK", cat: "cosmetic", mw: "340.4", purity: "99.3%", price: 48, size: "50 mg", tag: "In stock",
-      desc: "Copper-binding tripeptide investigated in dermal-matrix remodelling research." },
-    { id: "ipamorelin", name: "Ipamorelin", seq: "AibHDFK", cat: "cognitive", mw: "711.9", purity: "99.5%", price: 58, size: "5 mg", tag: "In stock",
-      desc: "Selective secretagogue peptide used in endocrine-signalling research." },
-    { id: "semax", name: "Semax", seq: "MEHFPGP", cat: "cognitive", mw: "813.9", purity: "99.4%", price: 69, size: "10 mg", tag: "New lot",
-      desc: "ACTH(4-10) analogue applied in neurotrophic and cognitive-performance studies." },
-    { id: "epithalon", name: "Epithalon", seq: "AEDG", cat: "longevity", mw: "390.3", purity: "99.5%", price: 44, size: "10 mg", tag: "In stock",
-      desc: "Synthetic tetrapeptide studied in telomerase-activity and circadian-regulation models." },
-    { id: "glutathione", name: "Glutathione", seq: "ECG", cat: "longevity", mw: "307.3", purity: "99.0%", price: 39, size: "600 mg", tag: "In stock",
-      desc: "Tripeptide antioxidant used broadly in oxidative-stress and redox research." },
-    { id: "nadplus", name: "NAD+", seq: "C21H27N7O14P2", cat: "longevity", mw: "663.4", purity: "99.2%", price: 89, size: "500 mg", tag: "Premium",
-      desc: "Coenzyme applied in cellular-metabolism and mitochondrial studies." },
-    { id: "selank", name: "Selank", seq: "TKPRPGP", cat: "cognitive", mw: "751.9", purity: "99.2%", price: 66, size: "10 mg", tag: "In stock",
-      desc: "Tuftsin-derived heptapeptide used in anxiolytic and neuro-signalling research." },
-    { id: "klow", name: "KLOW", seq: "GHK-Cu / BPC-157 / TB-500 / KPV", cat: "repair", mw: "—", purity: "99.0%", price: 110, size: "80 mg", tag: "New",
+    { id: "retatrutide-10", name: "Retatrutide", seq: "Modified peptide (39 aa)", cat: "metabolic", mw: "4731.4", purity: "99.2%", price: 60, size: "10 mg", tag: "In stock",
+      desc: "Triple GLP-1 / GIP / glucagon receptor agonist (“Reta”) used in metabolic-research models." },
+    { id: "retatrutide-20", name: "Retatrutide", seq: "Modified peptide (39 aa)", cat: "metabolic", mw: "4731.4", purity: "99.2%", price: 95, size: "20 mg", tag: "In stock",
+      desc: "Triple GLP-1 / GIP / glucagon receptor agonist (“Reta”) used in metabolic-research models." },
+    { id: "ghkcu-50", name: "GHK-Cu", seq: "GHK", cat: "cosmetic", mw: "340.4", purity: "99.3%", price: 45, size: "50 mg", tag: "In stock",
+      desc: "Copper-binding tripeptide investigated in dermal-matrix and skin research." },
+    { id: "ghkcu-100", name: "GHK-Cu", seq: "GHK", cat: "cosmetic", mw: "340.4", purity: "99.3%", price: 70, size: "100 mg", tag: "In stock",
+      desc: "Copper-binding tripeptide investigated in dermal-matrix and skin research." },
+    { id: "klow", name: "KLOW", seq: "GHK-Cu / BPC-157 / TB-500 / KPV", cat: "repair", mw: "—", purity: "99.0%", price: 110, size: "80 mg", tag: "Blend",
       desc: "Multi-peptide recovery blend (GHK-Cu, BPC-157, TB-500, KPV) studied in tissue-repair and skin research." },
-    { id: "retatrutide", name: "Retatrutide", seq: "Modified peptide (39 aa)", cat: "metabolic", mw: "4731.4", purity: "99.3%", price: 95, size: "20 mg", tag: "New lot",
-      desc: "Triple GLP-1 / GIP / glucagon receptor agonist (“GLP-3”, Reta) used in metabolic-research models." },
-    { id: "motsc", name: "MOTS-c", seq: "MRWQEMGYIFYPRKLR", cat: "metabolic", mw: "2174.6", purity: "99.1%", price: 65, size: "10 mg", tag: "New",
+    { id: "motsc", name: "MOTS-c", seq: "MRWQEMGYIFYPRKLR", cat: "metabolic", mw: "2174.6", purity: "99.1%", price: 65, size: "10 mg", tag: "In stock",
       desc: "Mitochondrial-derived 16-residue peptide studied in metabolic-regulation and exercise-response research." },
+    { id: "tesamorelin", name: "Tesamorelin", seq: "Modified GRF(1-44) analogue", cat: "metabolic", mw: "5135.9", purity: "99.2%", price: 75, size: "10 mg", tag: "In stock",
+      desc: "Stabilised GHRH analogue used in metabolic and body-composition research." },
+    { id: "tirzepatide", name: "Tirzepatide", seq: "Modified peptide (39 aa)", cat: "metabolic", mw: "4813.5", purity: "99.3%", price: 110, size: "20 mg", tag: "In stock",
+      desc: "Dual GLP-1 / GIP receptor agonist used in metabolic-research models." },
+    { id: "cjc-ipamorelin", name: "CJC-1295 + Ipamorelin", seq: "CJC-1295 + Ipamorelin (blend)", cat: "longevity", mw: "—", purity: "99.1%", price: 80, size: "10 mg", tag: "Blend",
+      desc: "Growth-hormone-secretagogue blend used in GH-axis and recovery research." },
+    { id: "tb500-bpc157", name: "TB-500 + BPC-157", seq: "TB-500 + BPC-157 (blend)", cat: "repair", mw: "—", purity: "99.2%", price: 90, size: "10 mg", tag: "Blend",
+      desc: "Recovery blend of two peptides studied for tissue repair and cell migration." },
+    { id: "ipamorelin", name: "Ipamorelin", seq: "Modified pentapeptide", cat: "longevity", mw: "711.9", purity: "99.5%", price: 55, size: "10 mg", tag: "In stock",
+      desc: "Selective growth-hormone secretagogue used in GH-axis research." },
+    { id: "kpv", name: "KPV", seq: "KPV", cat: "cosmetic", mw: "342.4", purity: "99.2%", price: 55, size: "10 mg", tag: "In stock",
+      desc: "α-MSH C-terminal tripeptide studied for anti-inflammatory and skin research." },
   ];
   const CAT = { repair: "Repair", metabolic: "Metabolic", cognitive: "Cognitive", longevity: "Longevity", cosmetic: "Cosmetic" };
+  const CAT_ORDER = ["repair", "metabolic", "cognitive", "longevity", "cosmetic"];
 
-  const PROD_KEY = "ironclad_forged_products_v2";
+  const PROD_KEY = "ironclad_forged_products_v3";
   function loadProducts() { try { const v = JSON.parse(localStorage.getItem(PROD_KEY)); return Array.isArray(v) && v.length ? v : null; } catch { return null; } }
   function saveProducts() { try { localStorage.setItem(PROD_KEY, JSON.stringify(PRODUCTS)); } catch {} }
   let PRODUCTS = loadProducts() || DEFAULTS.map((p) => ({ ...p }));
@@ -147,13 +148,21 @@
     if (add) addItem(add.dataset.add, add);
   });
 
-  /* ---------- filters ---------- */
-  $$(".chip").forEach((chip) => chip.addEventListener("click", () => {
-    $$(".chip").forEach((c) => { c.classList.remove("is-active"); c.setAttribute("aria-selected", "false"); });
+  /* ---------- filters (built from categories actually in stock) ---------- */
+  const filtersEl = $("#filters");
+  function renderFilters() {
+    const present = CAT_ORDER.filter((c) => PRODUCTS.some((p) => p.cat === c));
+    filtersEl.innerHTML = ['<button class="chip is-active" data-filter="all" role="tab" aria-selected="true">All</button>']
+      .concat(present.map((c) => `<button class="chip" data-filter="${c}" role="tab" aria-selected="false">${CAT[c]}</button>`))
+      .join("");
+  }
+  filtersEl.addEventListener("click", (e) => {
+    const chip = e.target.closest(".chip"); if (!chip) return;
+    $$(".chip", filtersEl).forEach((c) => { c.classList.remove("is-active"); c.setAttribute("aria-selected", "false"); });
     chip.classList.add("is-active"); chip.setAttribute("aria-selected", "true");
     const f = chip.dataset.filter;
     $$(".card").forEach((c) => c.classList.toggle("is-hidden", !(f === "all" || c.dataset.cat === f)));
-  }));
+  });
 
   /* ---------- pillars ---------- */
   const ICONS = {
@@ -380,9 +389,7 @@
         while (seen[id]) id += "-x"; seen[id] = 1;
         return { ...p, id, price: parseFloat(p.price) || 0 };
       });
-      saveProducts(); renderCatalog();
-      const active = $(".chip.is-active");
-      if (active) { const f = active.dataset.filter; $$(".card").forEach((c) => c.classList.toggle("is-hidden", !(f === "all" || c.dataset.cat === f))); }
+      saveProducts(); renderCatalog(); renderFilters();
       syncUI(); close(); toast("Catalog updated");
     });
   }
@@ -395,6 +402,7 @@
     $("#heroGear").innerHTML = heroGear();
     $("#year").textContent = new Date().getFullYear();
     renderCatalog();
+    renderFilters();
     renderPillars();
     renderForge();
     renderStrips();
