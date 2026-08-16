@@ -145,13 +145,7 @@
     <!-- ANNOUNCEMENT / OFFERS -->
     <section class="promo" id="offers" aria-label="Announcements and offers">
       <div class="wrap">
-        <div class="promo__inner plate">
-          <div class="promo__glow" aria-hidden="true"></div>
-          <span class="promo__tag">Announcement</span>
-          <h2 class="promo__title"><span class="chrome">Launch offer —</span> <span class="bronze-text">15% off</span> <span class="chrome">your first order</span></h2>
-          <p class="promo__text">Use code <span class="promo__code">IRONCLAD15</span> at checkout. New lots drop monthly — watch this space for flash sales and bundle deals.</p>
-          <a href="#catalog" class="btn btn--bronze">Shop the catalog</a>
-        </div>
+        <div class="promo__inner plate" id="promoInner"><!-- rendered by JS --></div>
       </div>
     </section>
 
@@ -280,6 +274,39 @@
         <span class="editor__spacer"></span>
         <button class="btn btn--steel" id="editCancel">Cancel</button>
         <button class="btn btn--bronze" id="editSave">Save changes</button>
+      </footer>
+    </div>
+  </div>
+
+  <!-- ANNOUNCEMENT EDITOR -->
+  <div class="editor" id="promoEditor" role="dialog" aria-modal="true" aria-label="Edit announcement" hidden>
+    <div class="editor__panel plate">
+      <header class="editor__head">
+        <div>
+          <h2 class="chrome">Edit announcement</h2>
+          <p>Shown above the catalog. Saves to this browser only.</p>
+        </div>
+        <button class="editor__close" id="promoClose" aria-label="Close">×</button>
+      </header>
+      <div class="editor__rows">
+        <div class="erow">
+          <div class="erow__grid">
+            <label class="erow__check erow__wide"><input type="checkbox" data-pf="on" /> Show the announcement banner</label>
+            <label>Tag<input data-pf="tag" /></label>
+            <label>Promo code (optional)<input data-pf="code" /></label>
+            <label class="erow__wide">Headline<input data-pf="title" /></label>
+            <label class="erow__wide">Highlight in headline (shown in bronze)<input data-pf="highlight" /></label>
+            <label class="erow__wide">Body text<textarea data-pf="text" rows="2"></textarea></label>
+            <label>Button label<input data-pf="cta" /></label>
+            <label>Button link<input data-pf="href" /></label>
+          </div>
+        </div>
+      </div>
+      <footer class="editor__foot">
+        <button class="btn btn--steel" id="promoReset">Reset to default</button>
+        <span class="editor__spacer"></span>
+        <button class="btn btn--steel" id="promoCancel">Cancel</button>
+        <button class="btn btn--bronze" id="promoSave">Save announcement</button>
       </footer>
     </div>
   </div>

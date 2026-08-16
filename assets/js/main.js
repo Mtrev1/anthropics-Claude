@@ -391,6 +391,68 @@
     });
   }
 
+  /* ---------- announcement / offers banner ---------- */
+  const PROMO_KEY = "ironclad_forged_promo_v1";
+  const PROMO_DISMISS = "ironclad_forged_promo_dismissed";
+  const PROMO_DEFAULT = {
+    on: true, tag: "Announcement",
+    title: "Launch offer — 15% off your first order", highlight: "15% off",
+    text: "New lots drop monthly — watch this space for flash sales and bundle deals.",
+    code: "IRONCLAD15", cta: "Shop the catalog", href: "#catalog",
+  };
+  const PROMO_FIELDS = ["tag", "title", "highlight", "text", "code", "cta", "href"];
+  let promo = loadPromo();
+  function loadPromo() { try { return Object.assign({}, PROMO_DEFAULT, JSON.parse(localStorage.getItem(PROMO_KEY)) || {}); } catch { return { ...PROMO_DEFAULT }; } }
+  function savePromo() { try { localStorage.setItem(PROMO_KEY, JSON.stringify(promo)); } catch {} }
+  const promoSig = (p) => [p.on, p.tag, p.title, p.highlight, p.text, p.code, p.cta, p.href].join("|");
+  function highlightTitle(title, hl) {
+    const t = esc(title); if (!hl) return t;
+    const h = esc(hl); const i = t.indexOf(h);
+    return i < 0 ? t : t.slice(0, i) + '<span class="bronze-text">' + h + "</span>" + t.slice(i + h.length);
+  }
+  const offersSection = $("#offers");
+  const pencil = '<svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/></svg>';
+  function renderPromo() {
+    let dismissed = false;
+    try { dismissed = localStorage.getItem(PROMO_DISMISS) === promoSig(promo); } catch {}
+    const shown = !!promo.on && !dismissed;
+    offersSection.style.display = shown ? "" : "none";
+    $$('a[href="#offers"]').forEach((a) => { a.style.display = shown ? "" : "none"; });
+    if (!shown) return;
+    $("#promoInner").innerHTML = `
+      <div class="promo__glow" aria-hidden="true"></div>
+      <button class="promo__edit" id="promoOpen" aria-label="Edit announcement" title="Edit announcement">${pencil}</button>
+      <button class="promo__dismiss" id="promoDismiss" aria-label="Dismiss announcement">×</button>
+      <span class="promo__tag">${esc(promo.tag)}</span>
+      <h2 class="promo__title">${highlightTitle(promo.title, promo.highlight)}</h2>
+      ${promo.text ? `<p class="promo__text">${esc(promo.text)}</p>` : ""}
+      ${promo.code ? `<p class="promo__codeline">Use code <span class="promo__code">${esc(promo.code)}</span></p>` : ""}
+      ${(promo.cta && promo.href) ? `<a class="btn btn--bronze" href="${esc(promo.href)}">${esc(promo.cta)}</a>` : ""}`;
+    $("#promoOpen").addEventListener("click", openPromoEditor);
+    $("#promoDismiss").addEventListener("click", () => { try { localStorage.setItem(PROMO_DISMISS, promoSig(promo)); } catch {} renderPromo(); });
+  }
+  function fillPromoFields() {
+    const m = $("#promoEditor");
+    m.querySelector('[data-pf="on"]').checked = !!promo.on;
+    PROMO_FIELDS.forEach((k) => { const el = m.querySelector(`[data-pf="${k}"]`); if (el) el.value = promo[k] || ""; });
+  }
+  function openPromoEditor() { const m = $("#promoEditor"); fillPromoFields(); m.hidden = false; document.body.style.overflow = "hidden"; requestAnimationFrame(() => m.classList.add("is-open")); $("#promoClose").focus(); }
+  function closePromoEditor() { const m = $("#promoEditor"); m.classList.remove("is-open"); document.body.style.overflow = ""; setTimeout(() => { m.hidden = true; }, 300); }
+  function initPromo() {
+    renderPromo();
+    $("#promoClose").addEventListener("click", closePromoEditor);
+    $("#promoCancel").addEventListener("click", closePromoEditor);
+    $("#promoEditor").addEventListener("click", (e) => { if (e.target.id === "promoEditor") closePromoEditor(); });
+    document.addEventListener("keydown", (e) => { if (e.key === "Escape" && !$("#promoEditor").hidden) closePromoEditor(); });
+    $("#promoReset").addEventListener("click", () => { promo = { ...PROMO_DEFAULT }; savePromo(); try { localStorage.removeItem(PROMO_DISMISS); } catch {} fillPromoFields(); toast("Reverted to default (unsaved until you Save)"); });
+    $("#promoSave").addEventListener("click", () => {
+      const m = $("#promoEditor");
+      promo.on = m.querySelector('[data-pf="on"]').checked;
+      PROMO_FIELDS.forEach((k) => { const el = m.querySelector(`[data-pf="${k}"]`); if (el) promo[k] = el.value; });
+      savePromo(); try { localStorage.removeItem(PROMO_DISMISS); } catch {} renderPromo(); closePromoEditor(); toast("Announcement updated");
+    });
+  }
+
   /* ---------- init ---------- */
   document.addEventListener("DOMContentLoaded", () => {
     $("#navEmblem").innerHTML = emblem();
@@ -409,5 +471,6 @@
     initNav();
     initNewsletter();
     initEditor();
+    initPromo();
   });
 })();
