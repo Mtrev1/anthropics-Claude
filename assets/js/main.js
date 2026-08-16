@@ -49,14 +49,14 @@
       <!-- lyophilized cake (white, uneven top) -->
       <path d="M18,99 Q25,95.5 32,97.5 Q39,99.5 46,97 L46,109 Q46,115 40,115 L24,115 Q18,115 18,109 Z" fill="url(#cakeG)"/>
       <path d="M18,99 Q25,95.5 32,97.5 Q39,99.5 46,97" fill="none" stroke="#ffffff" stroke-width="1" opacity=".55"/>
-      <!-- metal label with the brand crest -->
-      <rect x="16" y="55" width="32" height="32" rx="1.6" fill="#1b1f26" stroke="#4a4f58" stroke-width=".7"/>
-      <rect x="16" y="55" width="32" height="2.2" fill="#c2894b" opacity=".9"/>
-      <image href="assets/img/logo-mark.png" x="19.5" y="58.5" width="25" height="26.5" preserveAspectRatio="xMidYMid meet"/>
       <!-- glass highlights + shaded edge -->
       <rect x="21" y="47" width="3.4" height="60" rx="1.7" fill="#ffffff" opacity=".16"/>
       <rect x="27" y="49" width="1.6" height="52" rx="1" fill="#ffffff" opacity=".10"/>
       <path d="M45.5,47 L45.5,110 Q45.5,116 40.5,117" fill="none" stroke="#000" stroke-width="2.2" opacity=".16"/>
+      <!-- metal label with the brand crest (drawn above the glass so it stays crisp) -->
+      <rect x="16" y="55" width="32" height="32" rx="1.6" fill="#1b1f26" stroke="#4a4f58" stroke-width=".7"/>
+      <rect x="16" y="55" width="32" height="2.2" fill="#c2894b" opacity=".9"/>
+      <image href="assets/img/logo-mark.png" x="19" y="58" width="26" height="28" preserveAspectRatio="xMidYMid meet"/>
       <!-- rubber stopper -->
       <rect x="23.5" y="26" width="17" height="9" rx="1.5" fill="#3f4248"/>
       <rect x="23.5" y="26" width="17" height="3" fill="#4b4f55"/>
