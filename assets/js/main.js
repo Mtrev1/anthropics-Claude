@@ -53,10 +53,13 @@
       <rect x="21" y="47" width="3.4" height="60" rx="1.7" fill="#ffffff" opacity=".16"/>
       <rect x="27" y="49" width="1.6" height="52" rx="1" fill="#ffffff" opacity=".10"/>
       <path d="M45.5,47 L45.5,110 Q45.5,116 40.5,117" fill="none" stroke="#000" stroke-width="2.2" opacity=".16"/>
-      <!-- metal label with the brand crest (drawn above the glass so it stays crisp) -->
+      <!-- crisp vector brand label (sharp at any size) -->
       <rect x="16" y="55" width="32" height="32" rx="1.6" fill="#1b1f26" stroke="#4a4f58" stroke-width=".7"/>
       <rect x="16" y="55" width="32" height="2.2" fill="#c2894b" opacity=".9"/>
-      <image href="assets/img/logo-mark.png" x="19" y="58" width="26" height="28" preserveAspectRatio="xMidYMid meet"/>
+      <path d="M32 59 L38 61.2 L38 65.6 Q38 70.6 32 72.6 Q26 70.6 26 65.6 L26 61.2 Z" fill="#252b33" stroke="url(#bronzeG)" stroke-width="1"/>
+      <path d="M29 64.6 L32 67.6 L35 64.6" fill="none" stroke="url(#bronzeG)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/>
+      <text x="32" y="80" text-anchor="middle" font-family="Oswald, 'Arial Narrow', sans-serif" font-weight="700" font-size="5.5" letter-spacing=".1" fill="#eef1f6">IRONCLAD</text>
+      <text x="32" y="84.4" text-anchor="middle" font-family="'Chakra Petch', ui-monospace, monospace" font-weight="600" font-size="2.5" letter-spacing="1" fill="#c2894b">COMPOUNDS</text>
       <!-- rubber stopper -->
       <rect x="23.5" y="26" width="17" height="9" rx="1.5" fill="#3f4248"/>
       <rect x="23.5" y="26" width="17" height="3" fill="#4b4f55"/>
