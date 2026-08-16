@@ -28,18 +28,7 @@
   }
 
   function emblem() {
-    return `<svg viewBox="0 0 120 132" width="100%" height="100%" aria-hidden="true">
-      <path d="${gearPath(60, 58, 56, 47, 16)}" fill="url(#steelV)" fill-rule="evenodd" stroke="#0a0b0d" stroke-width="1.2"/>
-      <path d="M20,30 L100,30 L100,63 Q100,95 60,120 Q20,95 20,63 Z" fill="url(#steelV)" stroke="url(#bronzeG)" stroke-width="3"/>
-      <path d="M26,35 L94,35 L94,62 Q94,90 60,112 Q26,90 26,62 Z" fill="none" stroke="rgba(255,255,255,.16)" stroke-width="1"/>
-      <rect x="24" y="53" width="72" height="14" fill="url(#bronzeG)" stroke="#3a260f" stroke-width="1"/>
-      <text x="60" y="64" text-anchor="middle" font-family="Oswald, Arial Narrow, sans-serif" font-weight="700" font-size="11" letter-spacing="1" fill="#1a1206">IC</text>
-      <path d="M42,80 L60,96 L78,80" fill="none" stroke="url(#bronzeG)" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/>
-      <g fill="url(#chromeG)" stroke="#0a0b0d" stroke-width=".6">
-        <circle cx="30" cy="42" r="2.4"/><circle cx="60" cy="39.5" r="2.4"/><circle cx="90" cy="42" r="2.4"/>
-        <circle cx="34" cy="99" r="2.1"/><circle cx="86" cy="99" r="2.1"/>
-      </g>
-    </svg>`;
+    return '<img class="crest-img" src="assets/img/logo.jpg" alt="IronClad Compounds" />';
   }
   function heroGear() {
     return `<svg viewBox="0 0 220 220" aria-hidden="true">
@@ -399,7 +388,6 @@
     $("#navEmblem").innerHTML = emblem();
     $("#heroCrest").innerHTML = emblem();
     $("#ageEmblem").innerHTML = emblem();
-    $("#heroGear").innerHTML = heroGear();
     $("#year").textContent = new Date().getFullYear();
     renderCatalog();
     renderFilters();
