@@ -122,10 +122,10 @@
           ${low ? '<span class="card__low">Low stock</span>' : ""}
         </div>
         <div class="card__body">
-          <h3 class="card__name">${p.name}</h3>
+          <h3 class="card__name">${p.name} <span class="card__size">${p.size}</span></h3>
           <p class="card__desc">${p.desc}</p>
           <div class="card__seq" title="Sequence">${p.seq}</div>
-          <div class="card__spec"><span>${p.size}</span><span>MW ${p.mw}</span><span>RUO</span></div>
+          <div class="card__spec"><span>MW ${p.mw}</span><span>RUO</span></div>
           <div class="card__foot">
             <span class="card__price">${money(p.price)}<small>per vial</small></span>
             ${out
