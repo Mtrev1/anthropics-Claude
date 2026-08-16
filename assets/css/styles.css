@@ -234,6 +234,14 @@ ul, ol { list-style: none; }
 .card__coa a { color: var(--muted); text-decoration: underline; text-underline-offset: 3px; }
 .card__coa a:hover { color: var(--bronze-lt); }
 
+/* out of stock */
+.card--out .vial { opacity: .45; filter: grayscale(.5); }
+.card--out .card__name { color: var(--muted); }
+.card--out .card__purity { opacity: .5; }
+.card__oos { position: absolute; z-index: 2; top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(-9deg); font-family: var(--display); font-weight: 600; text-transform: uppercase; letter-spacing: 2px; font-size: .8rem; color: #eab59c; background: rgba(24,12,9,.74); border: 1px solid #7c4a3a; padding: 5px 12px; pointer-events: none; white-space: nowrap; }
+.card__add--oos { opacity: .65; cursor: not-allowed; }
+.card__add--oos:hover { transform: none; filter: none; }
+
 /* realistic vial (static product shot) */
 .vial { display: block; filter: drop-shadow(0 8px 12px rgba(0,0,0,.5)); }
 .card:hover .vial { transform: translateY(-3px); transition: transform .3s var(--ease); }
@@ -355,9 +363,7 @@ body.gate-locked { overflow: hidden; }
 .erow { position: relative; padding: 16px 16px 14px; }
 .erow__grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 12px; }
 .erow label { display: flex; flex-direction: column; gap: 5px; font-family: var(--tech); font-size: .62rem; letter-spacing: 1px; text-transform: uppercase; color: var(--faint); }
-.erow label:nth-child(1) { grid-column: span 3; }
-.erow label:nth-child(2) { grid-column: span 3; }
-.erow label:nth-child(3), .erow label:nth-child(4), .erow label:nth-child(5), .erow label:nth-child(6) { grid-column: span 3; }
+.erow label { grid-column: span 3; }
 .erow__wide { grid-column: 1 / -1 !important; }
 .erow input, .erow select, .erow textarea { font-family: var(--body); font-size: .92rem; color: var(--text); background: #0c0e11; border: 1px solid var(--line-2); padding: 9px 11px; width: 100%; text-transform: none; letter-spacing: 0; }
 .erow input:focus, .erow select:focus, .erow textarea:focus { outline: none; border-color: var(--bronze); box-shadow: 0 0 0 2px rgba(194,137,75,.18); }

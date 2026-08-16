@@ -28,7 +28,7 @@
   }
 
   function emblem() {
-    return '<img class="crest-img" src="assets/img/logo.jpg" alt="IronClad Compounds" />';
+    return '<img class="crest-img" src="assets/img/logo-mark.png" alt="IronClad Compounds" />';
   }
   function heroGear() {
     return `<svg viewBox="0 0 220 220" aria-hidden="true">
@@ -49,12 +49,10 @@
       <!-- lyophilized cake (white, uneven top) -->
       <path d="M18,99 Q25,95.5 32,97.5 Q39,99.5 46,97 L46,109 Q46,115 40,115 L24,115 Q18,115 18,109 Z" fill="url(#cakeG)"/>
       <path d="M18,99 Q25,95.5 32,97.5 Q39,99.5 46,97" fill="none" stroke="#ffffff" stroke-width="1" opacity=".55"/>
-      <!-- printed label -->
-      <rect x="16" y="66" width="32" height="18" fill="rgba(236,236,230,.94)"/>
-      <rect x="16" y="66" width="2.6" height="18" fill="#c2894b"/>
-      <line x1="22" y1="71" x2="43" y2="71" stroke="#33363b" stroke-width="1.5"/>
-      <line x1="22" y1="75.5" x2="39" y2="75.5" stroke="#8a8f99" stroke-width="1"/>
-      <line x1="22" y1="79" x2="41" y2="79" stroke="#8a8f99" stroke-width="1"/>
+      <!-- dark metal label with the brand crest -->
+      <rect x="16" y="65" width="32" height="20" rx="1.4" fill="#14171b" stroke="#3a3d42" stroke-width=".6"/>
+      <rect x="16" y="65" width="32" height="2" fill="#c2894b" opacity=".85"/>
+      <image href="assets/img/logo-mark.png" x="24.4" y="67.4" width="15.2" height="16.6" preserveAspectRatio="xMidYMid meet"/>
       <!-- glass highlights + shaded edge -->
       <rect x="21" y="47" width="3.4" height="60" rx="1.7" fill="#ffffff" opacity=".16"/>
       <rect x="27" y="49" width="1.6" height="52" rx="1" fill="#ffffff" opacity=".10"/>
@@ -72,37 +70,37 @@
     </svg>`;
   }
 
-  /* ---------- data (from inventory sheet; sequence/MW/purity are placeholders to confirm) ---------- */
+  /* ---------- data (from inventory sheet; * items = out of stock; sequence/MW/purity are placeholders to confirm) ---------- */
   const DEFAULTS = [
-    { id: "retatrutide-10", name: "Retatrutide", seq: "Modified peptide (39 aa)", cat: "metabolic", mw: "4731.4", purity: "99.2%", price: 60, size: "10 mg", tag: "In stock",
+    { id: "retatrutide-10", name: "Retatrutide", seq: "Modified peptide (39 aa)", cat: "metabolic", mw: "4731.4", purity: "99.2%", price: 60, size: "10 mg", stock: "in",
       desc: "Triple GLP-1 / GIP / glucagon receptor agonist (“Reta”) used in metabolic-research models." },
-    { id: "retatrutide-20", name: "Retatrutide", seq: "Modified peptide (39 aa)", cat: "metabolic", mw: "4731.4", purity: "99.2%", price: 95, size: "20 mg", tag: "In stock",
+    { id: "retatrutide-20", name: "Retatrutide", seq: "Modified peptide (39 aa)", cat: "metabolic", mw: "4731.4", purity: "99.2%", price: 95, size: "20 mg", stock: "in",
       desc: "Triple GLP-1 / GIP / glucagon receptor agonist (“Reta”) used in metabolic-research models." },
-    { id: "ghkcu-50", name: "GHK-Cu", seq: "GHK", cat: "cosmetic", mw: "340.4", purity: "99.3%", price: 45, size: "50 mg", tag: "In stock",
+    { id: "ghkcu-50", name: "GHK-Cu", seq: "GHK", cat: "cosmetic", mw: "340.4", purity: "99.3%", price: 45, size: "50 mg", stock: "out",
       desc: "Copper-binding tripeptide investigated in dermal-matrix and skin research." },
-    { id: "ghkcu-100", name: "GHK-Cu", seq: "GHK", cat: "cosmetic", mw: "340.4", purity: "99.3%", price: 70, size: "100 mg", tag: "In stock",
+    { id: "ghkcu-100", name: "GHK-Cu", seq: "GHK", cat: "cosmetic", mw: "340.4", purity: "99.3%", price: 70, size: "100 mg", stock: "out",
       desc: "Copper-binding tripeptide investigated in dermal-matrix and skin research." },
-    { id: "klow", name: "KLOW", seq: "GHK-Cu / BPC-157 / TB-500 / KPV", cat: "repair", mw: "—", purity: "99.0%", price: 110, size: "80 mg", tag: "Blend",
+    { id: "klow", name: "KLOW", seq: "GHK-Cu / BPC-157 / TB-500 / KPV", cat: "repair", mw: "—", purity: "99.0%", price: 110, size: "80 mg", stock: "in",
       desc: "Multi-peptide recovery blend (GHK-Cu, BPC-157, TB-500, KPV) studied in tissue-repair and skin research." },
-    { id: "motsc", name: "MOTS-c", seq: "MRWQEMGYIFYPRKLR", cat: "metabolic", mw: "2174.6", purity: "99.1%", price: 65, size: "10 mg", tag: "In stock",
+    { id: "motsc", name: "MOTS-c", seq: "MRWQEMGYIFYPRKLR", cat: "metabolic", mw: "2174.6", purity: "99.1%", price: 65, size: "10 mg", stock: "in",
       desc: "Mitochondrial-derived 16-residue peptide studied in metabolic-regulation and exercise-response research." },
-    { id: "tesamorelin", name: "Tesamorelin", seq: "Modified GRF(1-44) analogue", cat: "metabolic", mw: "5135.9", purity: "99.2%", price: 75, size: "10 mg", tag: "In stock",
+    { id: "tesamorelin", name: "Tesamorelin", seq: "Modified GRF(1-44) analogue", cat: "metabolic", mw: "5135.9", purity: "99.2%", price: 75, size: "10 mg", stock: "in",
       desc: "Stabilised GHRH analogue used in metabolic and body-composition research." },
-    { id: "tirzepatide", name: "Tirzepatide", seq: "Modified peptide (39 aa)", cat: "metabolic", mw: "4813.5", purity: "99.3%", price: 110, size: "20 mg", tag: "In stock",
+    { id: "tirzepatide", name: "Tirzepatide", seq: "Modified peptide (39 aa)", cat: "metabolic", mw: "4813.5", purity: "99.3%", price: 110, size: "20 mg", stock: "out",
       desc: "Dual GLP-1 / GIP receptor agonist used in metabolic-research models." },
-    { id: "cjc-ipamorelin", name: "CJC-1295 + Ipamorelin", seq: "CJC-1295 + Ipamorelin (blend)", cat: "longevity", mw: "—", purity: "99.1%", price: 80, size: "10 mg", tag: "Blend",
+    { id: "cjc-ipamorelin", name: "CJC-1295 + Ipamorelin", seq: "CJC-1295 + Ipamorelin (blend)", cat: "longevity", mw: "—", purity: "99.1%", price: 80, size: "10 mg", stock: "out",
       desc: "Growth-hormone-secretagogue blend used in GH-axis and recovery research." },
-    { id: "tb500-bpc157", name: "TB-500 + BPC-157", seq: "TB-500 + BPC-157 (blend)", cat: "repair", mw: "—", purity: "99.2%", price: 90, size: "10 mg", tag: "Blend",
+    { id: "tb500-bpc157", name: "TB-500 + BPC-157", seq: "TB-500 + BPC-157 (blend)", cat: "repair", mw: "—", purity: "99.2%", price: 90, size: "10 mg", stock: "out",
       desc: "Recovery blend of two peptides studied for tissue repair and cell migration." },
-    { id: "ipamorelin", name: "Ipamorelin", seq: "Modified pentapeptide", cat: "longevity", mw: "711.9", purity: "99.5%", price: 55, size: "10 mg", tag: "In stock",
+    { id: "ipamorelin", name: "Ipamorelin", seq: "Modified pentapeptide", cat: "longevity", mw: "711.9", purity: "99.5%", price: 55, size: "10 mg", stock: "out",
       desc: "Selective growth-hormone secretagogue used in GH-axis research." },
-    { id: "kpv", name: "KPV", seq: "KPV", cat: "cosmetic", mw: "342.4", purity: "99.2%", price: 55, size: "10 mg", tag: "In stock",
+    { id: "kpv", name: "KPV", seq: "KPV", cat: "cosmetic", mw: "342.4", purity: "99.2%", price: 55, size: "10 mg", stock: "out",
       desc: "α-MSH C-terminal tripeptide studied for anti-inflammatory and skin research." },
   ];
   const CAT = { repair: "Repair", metabolic: "Metabolic", cognitive: "Cognitive", longevity: "Longevity", cosmetic: "Cosmetic" };
   const CAT_ORDER = ["repair", "metabolic", "cognitive", "longevity", "cosmetic"];
 
-  const PROD_KEY = "ironclad_forged_products_v3";
+  const PROD_KEY = "ironclad_forged_products_v4";
   function loadProducts() { try { const v = JSON.parse(localStorage.getItem(PROD_KEY)); return Array.isArray(v) && v.length ? v : null; } catch { return null; } }
   function saveProducts() { try { localStorage.setItem(PROD_KEY, JSON.stringify(PRODUCTS)); } catch {} }
   let PRODUCTS = loadProducts() || DEFAULTS.map((p) => ({ ...p }));
@@ -110,13 +108,16 @@
   /* ---------- catalog ---------- */
   const grid = $("#grid");
   function renderCatalog() {
-    grid.innerHTML = PRODUCTS.map((p, i) => `
-      <li class="card plate reveal" data-cat="${p.cat}" data-id="${p.id}">
+    grid.innerHTML = PRODUCTS.map((p, i) => {
+      const out = p.stock === "out";
+      return `
+      <li class="card plate reveal${out ? " card--out" : ""}" data-cat="${p.cat}" data-id="${p.id}">
         <div class="card__stage">
           <span class="card__num">${String(i).padStart(2, "0")}</span>
           <span class="card__purity">${p.purity}</span>
           <span class="card__cat">${CAT[p.cat]}</span>
           ${vial()}
+          ${out ? '<span class="card__oos">Out of stock</span>' : ""}
         </div>
         <div class="card__body">
           <h3 class="card__name">${p.name}</h3>
@@ -125,11 +126,14 @@
           <div class="card__spec"><span>${p.size}</span><span>MW ${p.mw}</span><span>RUO</span></div>
           <div class="card__foot">
             <span class="card__price">${money(p.price)}<small>per vial</small></span>
-            <button class="btn btn--bronze card__add" data-add="${p.id}">Add</button>
+            ${out
+              ? '<button class="btn btn--steel card__add card__add--oos" disabled>Out of stock</button>'
+              : `<button class="btn btn--bronze card__add" data-add="${p.id}">Add</button>`}
           </div>
           <span class="card__coa">▸ COA · lot #IC-${1000 + Math.floor(Math.random() * 8999)} <a href="#standard">view report</a></span>
         </div>
-      </li>`).join("");
+      </li>`;
+    }).join("");
     observe($$(".card"));
   }
   grid.addEventListener("click", (e) => {
@@ -191,6 +195,7 @@
   /* ---------- credentials + ticker ---------- */
   function renderStrips() {
     const creds = [
+      ["shield", "For research purposes only"], ["flask", "Laboratory use only"],
       ["shield", "ISO 17025 partnered labs"], ["scan", "HPLC purity ≥ 99%"], ["shield", "Mass-spec identity confirmed"],
       ["flask", "Endotoxin screened"], ["flask", "Sealed under argon"], ["link", "Lot-level traceability"],
     ];
@@ -342,6 +347,7 @@
           <label>Price ($)<input data-f="price" type="number" min="0" step="0.01" value="${esc(p.price)}" /></label>
           <label>Purity<input data-f="purity" value="${esc(p.purity)}" /></label>
           <label>MW<input data-f="mw" value="${esc(p.mw)}" /></label>
+          <label>Stock<select data-f="stock"><option value="in"${(p.stock || "in") === "in" ? " selected" : ""}>In stock</option><option value="out"${p.stock === "out" ? " selected" : ""}>Out of stock</option></select></label>
           <label class="erow__wide">Sequence<input data-f="seq" value="${esc(p.seq)}" /></label>
           <label class="erow__wide">Description<textarea data-f="desc" rows="2">${esc(p.desc)}</textarea></label>
         </div>
@@ -386,7 +392,7 @@
   /* ---------- init ---------- */
   document.addEventListener("DOMContentLoaded", () => {
     $("#navEmblem").innerHTML = emblem();
-    $("#heroCrest").innerHTML = emblem();
+    $("#heroCrest").innerHTML = '<img class="crest-img" src="assets/img/logo.png" alt="IronClad Compounds" />';
     $("#ageEmblem").innerHTML = emblem();
     $("#year").textContent = new Date().getFullYear();
     renderCatalog();
