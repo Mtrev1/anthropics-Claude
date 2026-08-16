@@ -242,6 +242,9 @@ ul, ol { list-style: none; }
 .card__add--oos { opacity: .65; cursor: not-allowed; }
 .card__add--oos:hover { transform: none; filter: none; }
 
+/* low stock */
+.card__low { position: absolute; z-index: 2; bottom: 12px; right: 14px; font-family: var(--tech); font-size: .6rem; letter-spacing: 1px; text-transform: uppercase; color: #f0c07a; border: 1px solid #8a6a2e; background: rgba(58,40,14,.55); padding: 3px 8px; pointer-events: none; }
+
 /* realistic vial (static product shot) */
 .vial { display: block; filter: drop-shadow(0 8px 12px rgba(0,0,0,.5)); }
 .card:hover .vial { transform: translateY(-3px); transition: transform .3s var(--ease); }

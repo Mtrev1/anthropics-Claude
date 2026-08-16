@@ -78,7 +78,7 @@
       desc: "Triple GLP-1 / GIP / glucagon receptor agonist (“Reta”) used in metabolic-research models." },
     { id: "ghkcu-50", name: "GHK-Cu", seq: "GHK", cat: "cosmetic", mw: "340.4", purity: "99.3%", price: 45, size: "50 mg", stock: "out",
       desc: "Copper-binding tripeptide investigated in dermal-matrix and skin research." },
-    { id: "ghkcu-100", name: "GHK-Cu", seq: "GHK", cat: "cosmetic", mw: "340.4", purity: "99.3%", price: 70, size: "100 mg", stock: "out",
+    { id: "ghkcu-100", name: "GHK-Cu", seq: "GHK", cat: "cosmetic", mw: "340.4", purity: "99.3%", price: 70, size: "100 mg", stock: "low",
       desc: "Copper-binding tripeptide investigated in dermal-matrix and skin research." },
     { id: "klow", name: "KLOW", seq: "GHK-Cu / BPC-157 / TB-500 / KPV", cat: "repair", mw: "—", purity: "99.0%", price: 110, size: "80 mg", stock: "in",
       desc: "Multi-peptide recovery blend (GHK-Cu, BPC-157, TB-500, KPV) studied in tissue-repair and skin research." },
@@ -100,7 +100,7 @@
   const CAT = { repair: "Repair", metabolic: "Metabolic", cognitive: "Cognitive", longevity: "Longevity", cosmetic: "Cosmetic" };
   const CAT_ORDER = ["repair", "metabolic", "cognitive", "longevity", "cosmetic"];
 
-  const PROD_KEY = "ironclad_forged_products_v4";
+  const PROD_KEY = "ironclad_forged_products_v5";
   function loadProducts() { try { const v = JSON.parse(localStorage.getItem(PROD_KEY)); return Array.isArray(v) && v.length ? v : null; } catch { return null; } }
   function saveProducts() { try { localStorage.setItem(PROD_KEY, JSON.stringify(PRODUCTS)); } catch {} }
   let PRODUCTS = loadProducts() || DEFAULTS.map((p) => ({ ...p }));
@@ -110,6 +110,7 @@
   function renderCatalog() {
     grid.innerHTML = PRODUCTS.map((p, i) => {
       const out = p.stock === "out";
+      const low = p.stock === "low";
       return `
       <li class="card plate reveal${out ? " card--out" : ""}" data-cat="${p.cat}" data-id="${p.id}">
         <div class="card__stage">
@@ -118,6 +119,7 @@
           <span class="card__cat">${CAT[p.cat]}</span>
           ${vial()}
           ${out ? '<span class="card__oos">Out of stock</span>' : ""}
+          ${low ? '<span class="card__low">Low stock</span>' : ""}
         </div>
         <div class="card__body">
           <h3 class="card__name">${p.name}</h3>
@@ -347,7 +349,7 @@
           <label>Price ($)<input data-f="price" type="number" min="0" step="0.01" value="${esc(p.price)}" /></label>
           <label>Purity<input data-f="purity" value="${esc(p.purity)}" /></label>
           <label>MW<input data-f="mw" value="${esc(p.mw)}" /></label>
-          <label>Stock<select data-f="stock"><option value="in"${(p.stock || "in") === "in" ? " selected" : ""}>In stock</option><option value="out"${p.stock === "out" ? " selected" : ""}>Out of stock</option></select></label>
+          <label>Stock<select data-f="stock"><option value="in"${(p.stock || "in") === "in" ? " selected" : ""}>In stock</option><option value="low"${p.stock === "low" ? " selected" : ""}>Low stock</option><option value="out"${p.stock === "out" ? " selected" : ""}>Out of stock</option></select></label>
           <label class="erow__wide">Sequence<input data-f="seq" value="${esc(p.seq)}" /></label>
           <label class="erow__wide">Description<textarea data-f="desc" rows="2">${esc(p.desc)}</textarea></label>
         </div>
