@@ -49,10 +49,10 @@
       <!-- lyophilized cake (white, uneven top) -->
       <path d="M18,99 Q25,95.5 32,97.5 Q39,99.5 46,97 L46,109 Q46,115 40,115 L24,115 Q18,115 18,109 Z" fill="url(#cakeG)"/>
       <path d="M18,99 Q25,95.5 32,97.5 Q39,99.5 46,97" fill="none" stroke="#ffffff" stroke-width="1" opacity=".55"/>
-      <!-- dark metal label with the brand crest -->
-      <rect x="16" y="65" width="32" height="20" rx="1.4" fill="#14171b" stroke="#3a3d42" stroke-width=".6"/>
-      <rect x="16" y="65" width="32" height="2" fill="#c2894b" opacity=".85"/>
-      <image href="assets/img/logo-mark.png" x="24.4" y="67.4" width="15.2" height="16.6" preserveAspectRatio="xMidYMid meet"/>
+      <!-- metal label with the brand crest -->
+      <rect x="16" y="55" width="32" height="32" rx="1.6" fill="#1b1f26" stroke="#4a4f58" stroke-width=".7"/>
+      <rect x="16" y="55" width="32" height="2.2" fill="#c2894b" opacity=".9"/>
+      <image href="assets/img/logo-mark.png" x="19.5" y="58.5" width="25" height="26.5" preserveAspectRatio="xMidYMid meet"/>
       <!-- glass highlights + shaded edge -->
       <rect x="21" y="47" width="3.4" height="60" rx="1.7" fill="#ffffff" opacity=".16"/>
       <rect x="27" y="49" width="1.6" height="52" rx="1" fill="#ffffff" opacity=".10"/>
