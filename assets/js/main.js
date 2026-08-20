@@ -95,13 +95,11 @@
       desc: "Recovery blend of two peptides studied for tissue repair and cell migration." },
     { id: "ipamorelin", name: "Ipamorelin", seq: "Modified pentapeptide", cat: "longevity", mw: "711.9", purity: "99.5%", price: 55, size: "10 mg", stock: "out",
       desc: "Selective growth-hormone secretagogue used in GH-axis research." },
-    { id: "kpv", name: "KPV", seq: "KPV", cat: "cosmetic", mw: "342.4", purity: "99.2%", price: 55, size: "10 mg", stock: "out",
-      desc: "α-MSH C-terminal tripeptide studied for anti-inflammatory and skin research." },
   ];
   const CAT = { repair: "Repair", metabolic: "Metabolic", cognitive: "Cognitive", longevity: "Longevity", cosmetic: "Cosmetic" };
   const CAT_ORDER = ["repair", "metabolic", "cognitive", "longevity", "cosmetic"];
 
-  const PROD_KEY = "ironclad_forged_products_v7";
+  const PROD_KEY = "ironclad_forged_products_v8";
   function loadProducts() { try { const v = JSON.parse(localStorage.getItem(PROD_KEY)); return Array.isArray(v) && v.length ? v : null; } catch { return null; } }
   function saveProducts() { try { localStorage.setItem(PROD_KEY, JSON.stringify(PRODUCTS)); } catch {} }
   let PRODUCTS = loadProducts() || DEFAULTS.map((p) => ({ ...p }));
