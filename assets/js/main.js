@@ -79,8 +79,6 @@
       desc: "Triple GLP-1 / GIP / glucagon receptor agonist (“Reta”) used in metabolic-research models." },
     { id: "retatrutide-20", name: "GLP-3 RT", seq: "Modified peptide (39 aa)", cat: "metabolic", mw: "4731.4", purity: "99.2%", price: 95, size: "20 mg", stock: "in",
       desc: "Triple GLP-1 / GIP / glucagon receptor agonist (“Reta”) used in metabolic-research models." },
-    { id: "ghkcu-50", name: "GHK-Cu", seq: "GHK", cat: "cosmetic", mw: "340.4", purity: "99.3%", price: 45, size: "50 mg", stock: "out",
-      desc: "Copper-binding tripeptide investigated in dermal-matrix and skin research." },
     { id: "ghkcu-100", name: "GHK-Cu", seq: "GHK", cat: "cosmetic", mw: "340.4", purity: "99.3%", price: 70, size: "100 mg", stock: "low",
       desc: "Copper-binding tripeptide investigated in dermal-matrix and skin research." },
     { id: "klow", name: "KLOW", seq: "GHK-Cu / BPC-157 / TB-500 / KPV", cat: "repair", mw: "—", purity: "99.0%", price: 110, size: "80 mg", stock: "in",
@@ -103,7 +101,7 @@
   const CAT = { repair: "Repair", metabolic: "Metabolic", cognitive: "Cognitive", longevity: "Longevity", cosmetic: "Cosmetic" };
   const CAT_ORDER = ["repair", "metabolic", "cognitive", "longevity", "cosmetic"];
 
-  const PROD_KEY = "ironclad_forged_products_v6";
+  const PROD_KEY = "ironclad_forged_products_v7";
   function loadProducts() { try { const v = JSON.parse(localStorage.getItem(PROD_KEY)); return Array.isArray(v) && v.length ? v : null; } catch { return null; } }
   function saveProducts() { try { localStorage.setItem(PROD_KEY, JSON.stringify(PRODUCTS)); } catch {} }
   let PRODUCTS = loadProducts() || DEFAULTS.map((p) => ({ ...p }));
