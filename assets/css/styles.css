@@ -303,6 +303,16 @@ ul, ol { list-style: none; }
 .cta__form input:focus { outline: none; border-color: var(--bronze); box-shadow: 0 0 0 3px rgba(194,137,75,.15); }
 .cta__note { position: relative; margin-top: 14px; min-height: 1.2em; font-family: var(--tech); font-size: .8rem; color: var(--bronze-lt); }
 
+/* ============================ contact ============================ */
+.contact { display: flex; align-items: center; justify-content: space-between; gap: clamp(20px, 4vw, 48px); flex-wrap: wrap; padding: clamp(26px, 4vw, 40px) clamp(24px, 5vw, 44px); }
+.contact__title { font-family: var(--display); font-weight: 700; text-transform: uppercase; letter-spacing: .5px; line-height: 1.05; font-size: clamp(1.4rem, 3.2vw, 2.1rem); }
+.contact__sub { color: var(--muted); font-size: .95rem; margin-top: 8px; }
+.contact__phone { display: inline-flex; align-items: center; gap: 14px; color: var(--chrome); border: 1px solid var(--bronze-dk); background: rgba(194,137,75,.08); padding: 14px 22px; clip-path: polygon(8px 0,100% 0,100% calc(100% - 8px),calc(100% - 8px) 100%,0 100%,0 8px); transition: transform .25s var(--ease), background .25s var(--ease); }
+.contact__phone:hover { transform: translateY(-2px); background: rgba(194,137,75,.16); }
+.contact__phone svg { color: var(--bronze-lt); flex: none; }
+.contact__num { display: flex; flex-direction: column; font-family: var(--display); font-weight: 700; font-size: 1.5rem; letter-spacing: .5px; font-variant-numeric: tabular-nums; line-height: 1.1; }
+.contact__num small { font-family: var(--tech); font-weight: 400; font-size: .6rem; letter-spacing: 2px; text-transform: uppercase; color: var(--bronze); }
+
 /* ============================ footer ============================ */
 .foot { border-top: 1px solid var(--line-2); background: #08090b; }
 .foot__inner { display: grid; grid-template-columns: 1.8fr 1fr 1fr 1fr; gap: 32px; padding-top: 56px; padding-bottom: 40px; }
