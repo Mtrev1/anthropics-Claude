@@ -434,6 +434,15 @@ body.gate-locked { overflow: hidden; }
   .foot__inner { grid-template-columns: 1fr; gap: 24px; }
 }
 
+/* ============================ owner mode (edit lock) ============================ */
+.catalog__edit { display: none; }
+.promo__edit { display: none; }
+body.is-owner .catalog__edit { display: inline-flex; }
+body.is-owner .promo__edit { display: grid; }
+.ownerchip { position: fixed; left: 16px; bottom: 16px; z-index: 130; display: inline-flex; align-items: center; gap: 8px; font-family: var(--tech); font-size: .7rem; letter-spacing: 1px; text-transform: uppercase; color: var(--bronze-lt); background: rgba(20,22,27,.94); border: 1px solid var(--bronze-dk); padding: 8px 12px; cursor: pointer; }
+.ownerchip:hover { color: var(--chrome); border-color: var(--bronze); }
+.ownerchip__dot { width: 7px; height: 7px; border-radius: 50%; background: var(--bronze); box-shadow: 0 0 8px rgba(194,137,75,.8); }
+
 /* ============================ reduced motion ============================ */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; }

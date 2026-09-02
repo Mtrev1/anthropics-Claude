@@ -452,8 +452,47 @@
     });
   }
 
+  /* ---------- owner mode (client-side edit lock) ----------
+     Edit controls are hidden for everyone. Open the site with #admin and enter
+     the passcode to unlock editing on this device (remembered via localStorage).
+     Note: edits only ever save to the current browser, so this keeps the edit UI
+     private without affecting the shared/published site for anyone else.        */
+  const OWNER_PASSCODE = "IRONCLAD-ADMIN"; // change anytime
+  const OWNER_KEY = "ironclad_forged_owner";
+  function isOwner() { try { return localStorage.getItem(OWNER_KEY) === "1"; } catch { return false; } }
+  function renderOwnerChip() {
+    let chip = document.getElementById("ownerChip");
+    if (isOwner()) {
+      if (!chip) {
+        chip = document.createElement("button");
+        chip.id = "ownerChip"; chip.className = "ownerchip"; chip.type = "button";
+        chip.innerHTML = '<span class="ownerchip__dot" aria-hidden="true"></span>Owner mode · Exit';
+        chip.addEventListener("click", () => { setOwner(false); toast("Owner mode locked"); });
+        document.body.appendChild(chip);
+      }
+    } else if (chip) { chip.remove(); }
+  }
+  function setOwner(on) {
+    try { on ? localStorage.setItem(OWNER_KEY, "1") : localStorage.removeItem(OWNER_KEY); } catch {}
+    document.body.classList.toggle("is-owner", !!on);
+    renderOwnerChip();
+  }
+  function initOwner() {
+    document.body.classList.toggle("is-owner", isOwner());
+    if (location.hash.toLowerCase() === "#admin" && !isOwner()) {
+      const entry = window.prompt("Enter owner passcode to enable editing:");
+      if (entry != null) {
+        if (entry === OWNER_PASSCODE) { setOwner(true); toast("Owner mode unlocked"); }
+        else toast("Incorrect passcode");
+      }
+      try { history.replaceState(null, "", location.pathname + location.search); } catch {}
+    }
+    renderOwnerChip();
+  }
+
   /* ---------- init ---------- */
   document.addEventListener("DOMContentLoaded", () => {
+    initOwner();
     $("#navEmblem").innerHTML = emblem();
     $("#heroCrest").innerHTML = '<img class="crest-img" src="assets/img/logo.png" alt="IronClad Compounds" />';
     $("#ageEmblem").innerHTML = emblem();
