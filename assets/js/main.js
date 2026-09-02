@@ -418,16 +418,17 @@
     offersSection.style.display = shown ? "" : "none";
     $$('a[href="#offers"]').forEach((a) => { a.style.display = shown ? "" : "none"; });
     if (!shown) return;
+    const owner = isOwner();
     $("#promoInner").innerHTML = `
       <div class="promo__glow" aria-hidden="true"></div>
-      <button class="promo__edit" id="promoOpen" aria-label="Edit announcement" title="Edit announcement">${pencil}</button>
+      ${owner ? `<button class="promo__edit" id="promoOpen" aria-label="Edit announcement" title="Edit announcement">${pencil}</button>` : ""}
       <button class="promo__dismiss" id="promoDismiss" aria-label="Dismiss announcement">×</button>
       <span class="promo__tag">${esc(promo.tag)}</span>
       <h2 class="promo__title">${highlightTitle(promo.title, promo.highlight)}</h2>
       ${promo.text ? `<p class="promo__text">${esc(promo.text)}</p>` : ""}
       ${promo.code ? `<p class="promo__codeline">Use code <span class="promo__code">${esc(promo.code)}</span></p>` : ""}
       ${(promo.cta && promo.href) ? `<a class="btn btn--bronze" href="${esc(promo.href)}">${esc(promo.cta)}</a>` : ""}`;
-    $("#promoOpen").addEventListener("click", openPromoEditor);
+    if (owner) $("#promoOpen").addEventListener("click", openPromoEditor);
     $("#promoDismiss").addEventListener("click", () => { try { localStorage.setItem(PROMO_DISMISS, promoSig(promo)); } catch {} renderPromo(); });
   }
   function fillPromoFields() {
@@ -435,7 +436,7 @@
     m.querySelector('[data-pf="on"]').checked = !!promo.on;
     PROMO_FIELDS.forEach((k) => { const el = m.querySelector(`[data-pf="${k}"]`); if (el) el.value = promo[k] || ""; });
   }
-  function openPromoEditor() { const m = $("#promoEditor"); fillPromoFields(); m.hidden = false; document.body.style.overflow = "hidden"; requestAnimationFrame(() => m.classList.add("is-open")); $("#promoClose").focus(); }
+  function openPromoEditor() { if (!isOwner()) return; const m = $("#promoEditor"); fillPromoFields(); m.hidden = false; document.body.style.overflow = "hidden"; requestAnimationFrame(() => m.classList.add("is-open")); $("#promoClose").focus(); }
   function closePromoEditor() { const m = $("#promoEditor"); m.classList.remove("is-open"); document.body.style.overflow = ""; setTimeout(() => { m.hidden = true; }, 300); }
   function initPromo() {
     renderPromo();
@@ -445,6 +446,7 @@
     document.addEventListener("keydown", (e) => { if (e.key === "Escape" && !$("#promoEditor").hidden) closePromoEditor(); });
     $("#promoReset").addEventListener("click", () => { promo = { ...PROMO_DEFAULT }; savePromo(); try { localStorage.removeItem(PROMO_DISMISS); } catch {} fillPromoFields(); toast("Reverted to default (unsaved until you Save)"); });
     $("#promoSave").addEventListener("click", () => {
+      if (!isOwner()) return;
       const m = $("#promoEditor");
       promo.on = m.querySelector('[data-pf="on"]').checked;
       PROMO_FIELDS.forEach((k) => { const el = m.querySelector(`[data-pf="${k}"]`); if (el) promo[k] = el.value; });
@@ -476,6 +478,7 @@
     try { on ? localStorage.setItem(OWNER_KEY, "1") : localStorage.removeItem(OWNER_KEY); } catch {}
     document.body.classList.toggle("is-owner", !!on);
     renderOwnerChip();
+    renderPromo(); // add/remove the announcement pencil immediately
   }
   function initOwner() {
     document.body.classList.toggle("is-owner", isOwner());
