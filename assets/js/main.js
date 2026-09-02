@@ -457,7 +457,7 @@
      the passcode to unlock editing on this device (remembered via localStorage).
      Note: edits only ever save to the current browser, so this keeps the edit UI
      private without affecting the shared/published site for anyone else.        */
-  const OWNER_PASSCODE = "IRONCLAD-ADMIN"; // change anytime
+  const OWNER_PASSCODE = "AnythingIsPossible$"; // change anytime
   const OWNER_KEY = "ironclad_forged_owner";
   function isOwner() { try { return localStorage.getItem(OWNER_KEY) === "1"; } catch { return false; } }
   function renderOwnerChip() {
