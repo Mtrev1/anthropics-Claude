@@ -89,7 +89,7 @@
       desc: "Stabilised GHRH analogue used in metabolic and body-composition research." },
     { id: "tirzepatide", name: "Tirzepatide", seq: "Modified peptide (39 aa)", cat: "metabolic", mw: "4813.5", purity: "99.3%", price: 110, size: "20 mg", stock: "out",
       desc: "Dual GLP-1 / GIP receptor agonist used in metabolic-research models." },
-    { id: "cjc-ipamorelin", name: "CJC-1295 + Ipamorelin", seq: "CJC-1295 + Ipamorelin (blend)", cat: "longevity", mw: "—", purity: "99.1%", price: 80, size: "10 mg", stock: "out",
+    { id: "cjc-ipamorelin", name: "CJC-1295 No DAC / Ipamorelin", seq: "CJC-1295 No DAC + Ipamorelin (blend)", cat: "longevity", mw: "—", purity: "99.1%", price: 80, size: "10 mg", stock: "in",
       desc: "Growth-hormone-secretagogue blend used in GH-axis and recovery research." },
     { id: "tb500-bpc157", name: "TB-500 + BPC-157", seq: "TB-500 + BPC-157 (blend)", cat: "repair", mw: "—", purity: "99.2%", price: 90, size: "10 mg", stock: "out",
       desc: "Recovery blend of two peptides studied for tissue repair and cell migration." },
@@ -99,7 +99,7 @@
   const CAT = { repair: "Repair", metabolic: "Metabolic", cognitive: "Cognitive", longevity: "Longevity", cosmetic: "Cosmetic" };
   const CAT_ORDER = ["repair", "metabolic", "cognitive", "longevity", "cosmetic"];
 
-  const PROD_KEY = "ironclad_forged_products_v9";
+  const PROD_KEY = "ironclad_forged_products_v10";
   function loadProducts() { try { const v = JSON.parse(localStorage.getItem(PROD_KEY)); return Array.isArray(v) && v.length ? v : null; } catch { return null; } }
   function saveProducts() { try { localStorage.setItem(PROD_KEY, JSON.stringify(PRODUCTS)); } catch {} }
   let PRODUCTS = loadProducts() || DEFAULTS.map((p) => ({ ...p }));
