@@ -81,7 +81,6 @@
         <span class="brand__word"><span class="chrome">IRONCLAD</span><small>Compounds</small></span>
       </a>
       <nav class="nav__links" aria-label="Primary">
-        <a href="#offers">Offers</a>
         <a href="#catalog">Catalog</a>
         <a href="#standard">Standard</a>
         <a href="#process">Process</a>
@@ -95,7 +94,7 @@
     </div>
   </header>
   <div class="mobilemenu" id="mobileMenu" aria-hidden="true">
-    <a href="#offers">Offers</a><a href="#catalog">Catalog</a><a href="#standard">Standard</a><a href="#process">Process</a><a href="#faq">FAQ</a>
+    <a href="#catalog">Catalog</a><a href="#standard">Standard</a><a href="#process">Process</a><a href="#faq">FAQ</a>
   </div>
 
   <main id="top">
@@ -141,13 +140,6 @@
         <p class="section__sub">Four checks stand between the melt and your bench. Every lot clears all four, and the evidence ships with it.</p>
       </div>
       <div class="pillars" id="pillars"></div>
-    </section>
-
-    <!-- ANNOUNCEMENT / OFFERS -->
-    <section class="promo" id="offers" aria-label="Announcements and offers">
-      <div class="wrap">
-        <div class="promo__inner plate" id="promoInner"><!-- rendered by JS --></div>
-      </div>
     </section>
 
     <!-- CATALOG -->
@@ -290,39 +282,6 @@
         <span class="editor__spacer"></span>
         <button class="btn btn--steel" id="editCancel">Cancel</button>
         <button class="btn btn--bronze" id="editSave">Save changes</button>
-      </footer>
-    </div>
-  </div>
-
-  <!-- ANNOUNCEMENT EDITOR -->
-  <div class="editor" id="promoEditor" role="dialog" aria-modal="true" aria-label="Edit announcement" hidden>
-    <div class="editor__panel plate">
-      <header class="editor__head">
-        <div>
-          <h2 class="chrome">Edit announcement</h2>
-          <p>Shown above the catalog. Saves to this browser only.</p>
-        </div>
-        <button class="editor__close" id="promoClose" aria-label="Close">×</button>
-      </header>
-      <div class="editor__rows">
-        <div class="erow">
-          <div class="erow__grid">
-            <label class="erow__check erow__wide"><input type="checkbox" data-pf="on" /> Show the announcement banner</label>
-            <label>Tag<input data-pf="tag" /></label>
-            <label>Promo code (optional)<input data-pf="code" /></label>
-            <label class="erow__wide">Headline<input data-pf="title" /></label>
-            <label class="erow__wide">Highlight in headline (shown in bronze)<input data-pf="highlight" /></label>
-            <label class="erow__wide">Body text<textarea data-pf="text" rows="2"></textarea></label>
-            <label>Button label<input data-pf="cta" /></label>
-            <label>Button link<input data-pf="href" /></label>
-          </div>
-        </div>
-      </div>
-      <footer class="editor__foot">
-        <button class="btn btn--steel" id="promoReset">Reset to default</button>
-        <span class="editor__spacer"></span>
-        <button class="btn btn--steel" id="promoCancel">Cancel</button>
-        <button class="btn btn--bronze" id="promoSave">Save announcement</button>
       </footer>
     </div>
   </div>

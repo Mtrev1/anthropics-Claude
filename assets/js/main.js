@@ -412,6 +412,7 @@
   const offersSection = $("#offers");
   const pencil = '<svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/></svg>';
   function renderPromo() {
+    if (!offersSection || !document.getElementById("promoInner")) return; // announcement section removed
     let dismissed = false;
     try { dismissed = localStorage.getItem(PROMO_DISMISS) === promoSig(promo); } catch {}
     const shown = !!promo.on && !dismissed;
@@ -439,6 +440,7 @@
   function openPromoEditor() { if (!isOwner()) return; const m = $("#promoEditor"); fillPromoFields(); m.hidden = false; document.body.style.overflow = "hidden"; requestAnimationFrame(() => m.classList.add("is-open")); $("#promoClose").focus(); }
   function closePromoEditor() { const m = $("#promoEditor"); m.classList.remove("is-open"); document.body.style.overflow = ""; setTimeout(() => { m.hidden = true; }, 300); }
   function initPromo() {
+    if (!document.getElementById("promoEditor")) return; // announcement editor removed
     renderPromo();
     $("#promoClose").addEventListener("click", closePromoEditor);
     $("#promoCancel").addEventListener("click", closePromoEditor);
