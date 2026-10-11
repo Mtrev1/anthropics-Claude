@@ -75,7 +75,7 @@
 
   /* ---------- data (from inventory sheet; * items = out of stock; sequence/MW/purity are placeholders to confirm) ---------- */
   const DEFAULTS = [
-    { id: "retatrutide-10", name: "GLP-1 RT", seq: "Modified peptide (39 aa)", cat: "metabolic", mw: "4731.4", purity: "99.2%", price: 60, size: "10 mg", stock: "in",
+    { id: "retatrutide-10", name: "GLP-1 RT", seq: "Modified peptide (39 aa)", cat: "metabolic", mw: "4731.4", purity: "99.2%", price: 65, size: "10 mg", stock: "in",
       desc: "Triple GLP-1 / GIP / glucagon receptor agonist used in metabolic-research models." },
     { id: "retatrutide-20", name: "GLP-1 RT", seq: "Modified peptide (39 aa)", cat: "metabolic", mw: "4731.4", purity: "99.2%", price: 95, size: "20 mg", stock: "in",
       desc: "Triple GLP-1 / GIP / glucagon receptor agonist used in metabolic-research models." },
@@ -99,7 +99,7 @@
   const CAT = { repair: "Repair", metabolic: "Metabolic", cognitive: "Cognitive", longevity: "Longevity", cosmetic: "Cosmetic" };
   const CAT_ORDER = ["repair", "metabolic", "cognitive", "longevity", "cosmetic"];
 
-  const PROD_KEY = "ironclad_forged_products_v11";
+  const PROD_KEY = "ironclad_forged_products_v12";
   function loadProducts() { try { const v = JSON.parse(localStorage.getItem(PROD_KEY)); return Array.isArray(v) && v.length ? v : null; } catch { return null; } }
   function saveProducts() { try { localStorage.setItem(PROD_KEY, JSON.stringify(PRODUCTS)); } catch {} }
   let PRODUCTS = loadProducts() || DEFAULTS.map((p) => ({ ...p }));
