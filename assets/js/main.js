@@ -79,7 +79,7 @@
       desc: "Triple GLP-1 / GIP / glucagon receptor agonist used in metabolic-research models." },
     { id: "retatrutide-20", name: "GLP-1 RT", seq: "Modified peptide (39 aa)", cat: "metabolic", mw: "4731.4", purity: "99.2%", price: 95, size: "20 mg", stock: "in",
       desc: "Triple GLP-1 / GIP / glucagon receptor agonist used in metabolic-research models." },
-    { id: "ghkcu-100", name: "GHK-Cu", seq: "GHK", cat: "cosmetic", mw: "340.4", purity: "99.3%", price: 70, size: "100 mg", stock: "out",
+    { id: "ghkcu-50", name: "GHK-Cu", seq: "GHK", cat: "cosmetic", mw: "340.4", purity: "99.3%", price: 60, size: "50 mg", stock: "in",
       desc: "Copper-binding tripeptide investigated in dermal-matrix and skin research." },
     { id: "klow", name: "KLOW", seq: "GHK-Cu / BPC-157 / TB-500 / KPV", cat: "repair", mw: "—", purity: "99.0%", price: 110, size: "80 mg", stock: "in",
       desc: "Multi-peptide recovery blend (GHK-Cu, BPC-157, TB-500, KPV) studied in tissue-repair and skin research." },
@@ -93,13 +93,15 @@
       desc: "Growth-hormone-secretagogue blend used in GH-axis and recovery research." },
     { id: "tb500-bpc157", name: "TB-500 + BPC-157", seq: "TB-500 + BPC-157 (blend)", cat: "repair", mw: "—", purity: "99.2%", price: 90, size: "10 mg", stock: "out",
       desc: "Recovery blend of two peptides studied for tissue repair and cell migration." },
-    { id: "ipamorelin", name: "Ipamorelin", seq: "Modified pentapeptide", cat: "longevity", mw: "711.9", purity: "99.5%", price: 55, size: "10 mg", stock: "out",
+    { id: "bpc157", name: "BPC-157", seq: "GEPPPGKPADDAGLV (15 aa)", cat: "repair", mw: "1419.5", purity: "99.4%", price: 65, size: "10 mg", stock: "in",
+      desc: "Pentadecapeptide studied in tissue-repair, gut and musculoskeletal research." },
+    { id: "ipamorelin", name: "Ipamorelin", seq: "Modified pentapeptide", cat: "longevity", mw: "711.9", purity: "99.5%", price: 55, size: "10 mg", stock: "in",
       desc: "Selective growth-hormone secretagogue used in GH-axis research." },
   ];
   const CAT = { repair: "Repair", metabolic: "Metabolic", cognitive: "Cognitive", longevity: "Longevity", cosmetic: "Cosmetic" };
   const CAT_ORDER = ["repair", "metabolic", "cognitive", "longevity", "cosmetic"];
 
-  const PROD_KEY = "ironclad_forged_products_v12";
+  const PROD_KEY = "ironclad_forged_products_v13";
   function loadProducts() { try { const v = JSON.parse(localStorage.getItem(PROD_KEY)); return Array.isArray(v) && v.length ? v : null; } catch { return null; } }
   function saveProducts() { try { localStorage.setItem(PROD_KEY, JSON.stringify(PRODUCTS)); } catch {} }
   let PRODUCTS = loadProducts() || DEFAULTS.map((p) => ({ ...p }));
